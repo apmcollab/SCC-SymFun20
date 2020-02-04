@@ -12,7 +12,7 @@ The "^" is interpreted as the exponentiation operator, i.e. x^2 is x squared.
 
 The SCC::SymFunUtility class provides member functions that differentiate SCC::SymFun instances symbolically and return the result as a SCC:SymFun instance. 
 
-In addition to the samples contained within this repository, the documentation contains code snippets that demonstrates usage of the SCC::SymFun and SCC::SymFunUtility classes. 
+In addition to the samples contained within this repository, the documentation contains code snippets that demonstrate usage of the SCC::SymFun and SCC::SymFunUtility classes. 
 
 **Note:** The SCC::SymFun and SCC::SymFunUtility in this repository are not backwards compatable with prior versions of the SymFun classes. The header files for the new versions are distinguished by the prefix SCC_ and all source code is contained within these new header files to facilitate usage. 
 
