@@ -110,7 +110,7 @@ Public Member Functions</h2></td></tr>
 <p>Required version of C++ : &gt;= C++11</p>
 <hr/>
 <p> Sample code illustrating use of <a class="el" href="class_s_c_c_1_1_sym_fun_exception.html" title="A class derived from std_runtime_error to facilitate exception handling for SCC::SymFun. ">SymFunException</a> within a try/catch block.</p>
-<div class="fragment"><div class="line"><span class="keywordtype">string</span> S             = <span class="stringliteral">&quot;x^2&quot;</span>;            <span class="comment">// specifying a function in x</span></div><div class="line"></div><div class="line"><a class="code" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a> F;                           <span class="comment">// Create instance</span></div><div class="line"></div><div class="line"><span class="keywordflow">try</span></div><div class="line">{</div><div class="line">F.<a class="code" href="class_s_c_c_1_1_sym_fun.html#ac2a21e7154c087fb0b0e44aeb8c1749d">initialize</a>(S);                         <span class="comment">// initialize instance</span></div><div class="line">}</div><div class="line"><span class="keywordflow">catch</span> (<span class="keyword">const</span> <a class="code" href="class_s_c_c_1_1_sym_fun_exception.html">SCC::SymFunException</a>&amp; e)    <span class="comment">// exception handling</span></div><div class="line">{</div><div class="line">      cerr &lt;&lt; e.<a class="code" href="class_s_c_c_1_1_sym_fun_exception.html#ab1dfcf8f689b16ade11825c501fd70be">what</a>() &lt;&lt; endl;;</div><div class="line">      cerr &lt;&lt; <span class="stringliteral">&quot;XXXX Execution Terminated XXXXX&quot;</span> &lt;&lt; endl;</div><div class="line">      exit(1);</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line">cout &lt;&lt; <span class="stringliteral">&quot;x^2 evaluated at 2.0 = &quot;</span> &lt;&lt; F(2.0) &lt;&lt; endl;  <span class="comment">// evaluate and output</span></div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<div class="fragment"><div class="line">std::string S        = <span class="stringliteral">&quot;x^2&quot;</span>;            <span class="comment">// specifying a function in x</span></div><div class="line"></div><div class="line"><a class="code" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a> F;                           <span class="comment">// Create instance</span></div><div class="line"></div><div class="line"><span class="keywordflow">try</span></div><div class="line">{</div><div class="line">F.<a class="code" href="class_s_c_c_1_1_sym_fun.html#ac2a21e7154c087fb0b0e44aeb8c1749d">initialize</a>(S);                         <span class="comment">// initialize instance</span></div><div class="line">}</div><div class="line"><span class="keywordflow">catch</span> (<span class="keyword">const</span> <a class="code" href="class_s_c_c_1_1_sym_fun_exception.html">SCC::SymFunException</a>&amp; e)    <span class="comment">// exception handling</span></div><div class="line">{</div><div class="line">      std::cerr &lt;&lt; e.<a class="code" href="class_s_c_c_1_1_sym_fun_exception.html#ab1dfcf8f689b16ade11825c501fd70be">what</a>() &lt;&lt; std::endl;;</div><div class="line">      std::cerr &lt;&lt; <span class="stringliteral">&quot;XXXX Execution Terminated XXXXX&quot;</span> &lt;&lt; std::endl;</div><div class="line">      exit(1);</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;x^2 evaluated at 2.0 = &quot;</span> &lt;&lt; F(2.0) &lt;&lt; std::endl;  <span class="comment">// evaluate and output</span></div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="afb8ada79f8baf72f228bf053f8fcf93b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -179,7 +179,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Returns function specification string that caused the error. </p>
+<p>Returns function specification std::string that caused the error. </p>
 
 </div>
 </div>
@@ -219,7 +219,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2020 10:31:57 for SymFun20 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 20 2020 10:22:05 for SymFun20 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

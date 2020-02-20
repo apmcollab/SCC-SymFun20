@@ -19,7 +19,7 @@ In addition to the samples contained within this repository, the documentation c
 ### Prerequisites
 C++11
 ### Versioning
-Release : 20.03.06
+Release : 2.0.0
 ### Authors
 Chris Anderson
 ### License

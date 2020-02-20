@@ -88,8 +88,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad2a055984d6c99ce8045312279d22eee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_c_c_1_1_sym_fun_utility.html#ad2a055984d6c99ce8045312279d22eee">SymFunUtility</a> ()</td></tr>
 <tr class="separator:ad2a055984d6c99ce8045312279d22eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d54a145ffa358bbfb6d8695d34736d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_c_c_1_1_sym_fun_utility.html#a4d54a145ffa358bbfb6d8695d34736d4">differentiate</a> (<a class="el" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a> &amp;F, const string &amp;varName)</td></tr>
-<tr class="separator:a4d54a145ffa358bbfb6d8695d34736d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d2e0ccc10fada3a3807b1aa927506b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_c_c_1_1_sym_fun_utility.html#a0d2e0ccc10fada3a3807b1aa927506b9">differentiate</a> (<a class="el" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a> &amp;F, const std::string &amp;varName)</td></tr>
+<tr class="separator:a0d2e0ccc10fada3a3807b1aa927506b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>SCC::SymUtility is a BETA version of a class that provides member functions to evaluate the derivative of a <a class="el" href="class_s_c_c_1_1_sym_fun.html" title="A class whose instances evaluate double valued functions of double variables specified symbolically...">SymFun</a> instance symbolically and return the result as a <a class="el" href="class_s_c_c_1_1_sym_fun.html" title="A class whose instances evaluate double valued functions of double variables specified symbolically...">SymFun</a> instance.</p>
@@ -120,7 +120,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a4d54a145ffa358bbfb6d8695d34736d4"></a>
+<a class="anchor" id="a0d2e0ccc10fada3a3807b1aa927506b9"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -136,7 +136,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>varName</em>&#160;</td>
         </tr>
         <tr>
@@ -152,9 +152,12 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Differentiates the input <a class="el" href="class_s_c_c_1_1_sym_fun.html" title="A class whose instances evaluate double valued functions of double variables specified symbolically...">SCC::SymFun</a> instance symbolically with respect to the variable whose name is specified in var and returns the result as an <a class="el" href="class_s_c_c_1_1_sym_fun.html" title="A class whose instances evaluate double valued functions of double variables specified symbolically...">SCC::SymFun</a> instance.</p>
-<p>: The <a class="el" href="class_s_c_c_1_1_sym_fun.html" title="A class whose instances evaluate double valued functions of double variables specified symbolically...">SCC::SymFun</a> instance to be differentiated  : The name of the variable that the input function is being differentiated with respect to.</p>
+<ul>
+<li>F : The <a class="el" href="class_s_c_c_1_1_sym_fun.html" title="A class whose instances evaluate double valued functions of double variables specified symbolically...">SCC::SymFun</a> instance to be differentiated </li>
+<li>varName : The name of the variable that the input function is being differentiated with respect to.</li>
+</ul>
 <hr/>
-<p> Sample usage for differentiating a function of two variables x and y. </p><div class="fragment"><div class="line">vector&lt;string&gt;  V = {<span class="stringliteral">&quot;x&quot;</span>,<span class="stringliteral">&quot;y&quot;</span>};                       <span class="comment">// specify variables</span></div><div class="line"></div><div class="line">std::string S = <span class="stringliteral">&quot;2.0*x+ sin(x) + y^2&quot;</span>;               <span class="comment">// specify function</span></div><div class="line"></div><div class="line"><a class="code" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a> F(V,S);                                   <span class="comment">// create instance</span></div><div class="line"></div><div class="line"><a class="code" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a>   DFx;                                    <span class="comment">// Instances for partial derivatives</span></div><div class="line"><a class="code" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a>   DFy;</div><div class="line"></div><div class="line"><a class="code" href="class_s_c_c_1_1_sym_fun_utility.html">SCC::SymFunUtility</a> symFunUtility;</div><div class="line"></div><div class="line">DFx = symFunUtility.<a class="code" href="class_s_c_c_1_1_sym_fun_utility.html#a4d54a145ffa358bbfb6d8695d34736d4">differentiate</a>(F,<span class="stringliteral">&quot;x&quot;</span>);</div><div class="line">DFy = symFunUtility.<a class="code" href="class_s_c_c_1_1_sym_fun_utility.html#a4d54a145ffa358bbfb6d8695d34736d4">differentiate</a>(F,<span class="stringliteral">&quot;y&quot;</span>);</div><div class="line"></div><div class="line">cout &lt;&lt; <span class="stringliteral">&quot;SymFun F(x,y) &quot;</span> &lt;&lt; endl &lt;&lt; endl;</div><div class="line">cout &lt;&lt; F &lt;&lt; endl &lt;&lt; endl;</div><div class="line"></div><div class="line">cout &lt;&lt; <span class="stringliteral">&quot;SymFun derivative of F(x,y) with respect to x &quot;</span> &lt;&lt; endl &lt;&lt; endl;</div><div class="line">cout &lt;&lt; DFx &lt;&lt; endl &lt;&lt; endl;</div><div class="line"></div><div class="line"></div><div class="line">cout &lt;&lt; <span class="stringliteral">&quot;SymFun derivative of F(x,y) with respect to y &quot;</span> &lt;&lt; endl &lt;&lt; endl;</div><div class="line">cout &lt;&lt; DFy &lt;&lt; endl &lt;&lt; endl;</div></div><!-- fragment --> 
+<p> Sample usage for differentiating a function of two variables x and y. </p><div class="fragment"><div class="line">std::vector&lt;std::string&gt;  V = {<span class="stringliteral">&quot;x&quot;</span>,<span class="stringliteral">&quot;y&quot;</span>};             <span class="comment">// specify variables</span></div><div class="line"></div><div class="line">std::string S = <span class="stringliteral">&quot;2.0*x+ sin(x) + y^2&quot;</span>;               <span class="comment">// specify function</span></div><div class="line"></div><div class="line"><a class="code" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a> F(V,S);                                   <span class="comment">// create instance</span></div><div class="line"></div><div class="line"><a class="code" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a>   DFx;                                    <span class="comment">// Instances for partial derivatives</span></div><div class="line"><a class="code" href="class_s_c_c_1_1_sym_fun.html">SCC::SymFun</a>   DFy;</div><div class="line"></div><div class="line"><a class="code" href="class_s_c_c_1_1_sym_fun_utility.html">SCC::SymFunUtility</a> symFunUtility;</div><div class="line"></div><div class="line">DFx = symFunUtility.<a class="code" href="class_s_c_c_1_1_sym_fun_utility.html#a0d2e0ccc10fada3a3807b1aa927506b9">differentiate</a>(F,<span class="stringliteral">&quot;x&quot;</span>);</div><div class="line">DFy = symFunUtility.<a class="code" href="class_s_c_c_1_1_sym_fun_utility.html#a0d2e0ccc10fada3a3807b1aa927506b9">differentiate</a>(F,<span class="stringliteral">&quot;y&quot;</span>);</div><div class="line"></div><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;SymFun F(x,y) &quot;</span> &lt;&lt; std::endl &lt;&lt; std::endl;</div><div class="line">std::cout &lt;&lt; F &lt;&lt; std::endl &lt;&lt; std::endl;</div><div class="line"></div><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;SymFun derivative of F(x,y) with respect to x &quot;</span> &lt;&lt; std::endl &lt;&lt; std::endl;</div><div class="line">std::cout &lt;&lt; DFx &lt;&lt; std::endl &lt;&lt; std::endl;</div><div class="line"></div><div class="line"></div><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;SymFun derivative of F(x,y) with respect to y &quot;</span> &lt;&lt; std::endl &lt;&lt; std::endl;</div><div class="line">std::cout &lt;&lt; DFy &lt;&lt; std::endl &lt;&lt; std::endl;</div></div><!-- fragment --> 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
@@ -163,7 +166,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2020 10:31:57 for SymFun20 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 20 2020 10:22:05 for SymFun20 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

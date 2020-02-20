@@ -1,9 +1,9 @@
 //
 //##################################################################
-//  		           SCC_SymFun.h 
+//                     SCC_SymFun.h 
 //##################################################################
 //
-//	Chris Anderson 9/10/96 - 2020  (C) UCLA
+//    Chris Anderson 9/10/96 - 2020  (C) UCLA
 //
 //  Version 02/04/2020 : 
 //  Based upon 2016 version.
@@ -41,8 +41,6 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
-using namespace std;
-
 
 #ifndef SYMBOLIC_FUNCTION_
 #define SYMBOLIC_FUNCTION_
@@ -71,7 +69,7 @@ namespace SCC
  \brief A class whose instances evaluate double valued functions of double variables specified symbolically
 
  Instances of SCC::SymFun provide means of evaluating functions of double variables that
- are specified symbolically, i.e. as string. The names of the
+ are specified symbolically, i.e. as std::string. The names of the
  variables and symbolic constants used to express the function symbolically are specified by the
  programmer. The operations allowed in the function specification include the standard algebraic operations as well as
  many of the standard functions available for double values in the C++ standard library.
@@ -79,7 +77,7 @@ namespace SCC
  The operators allowed are
 
  {"+", "-", "+", "-", "*", "/", "^", "sin", "cos", "tan","asin","acos","atan","atan2", "sinh","cosh","tanh",
-	    "ceil","exp","abs","floor","fmod","log","log10","sqrt","pow"};
+        "ceil","exp","abs","floor","fmod","log","log10","sqrt","pow"};
 
 The "^" is interpreted as the exponentiation operator, i.e. x^2 is x squared.
 
@@ -106,9 +104,9 @@ public  :
 
     SymFun()
     {
-    	 bool nullInstanceFlag = true;
-    	 destroy(nullInstanceFlag);
-    	 initialize();
+         bool nullInstanceFlag = true;
+         destroy(nullInstanceFlag);
+         initialize();
     }
 
     /**
@@ -116,8 +114,8 @@ public  :
      */
      SymFun(const SymFun& F)
      {
-     	bool nullInstanceFlag = true;
-     	destroy(nullInstanceFlag);
+         bool nullInstanceFlag = true;
+         destroy(nullInstanceFlag);
      //
      //  Allocate Storage and Initalize
      //
@@ -189,107 +187,107 @@ public  :
 
     /**
     Creates a SCC::SymFun instance to be a function in one variable, x, where the function is
-    specified by the string S. If the construction process fails, program execution stops and an error message is output.
+    specified by the std::string S. If the construction process fails, program execution stops and an error message is output.
     See initialize(...) member functions for creation with exception handling.
 
     @arg S: std::string in the variable x that specifies the function.
 
     <HR>
     Sample specification and use of a function expressed in a variable x:
-	\code
+    \code
 
-    std::string S = "2.0*x+ sin(x)";                      // specify function
+    std::string S = "2.0*x+ sin(x)";                 // specify function
 
-    SCC::SymFun F(S);                                     // create instance
+    SCC::SymFun F(S);                                // create instance
 
-    cout << "x^2 evaluated at 2.0 = " << F(2.0) << endl;  // evaluate and output
+    std::cout << "x^2 evaluated at 2.0 = " << F(2.0) << std::endl;  // evaluate and output
     \endcode
     */
 
-    SymFun(const string& S)
+    SymFun(const std::string& S)
     {
-    	 bool nullInstanceFlag = true;
-    	 destroy(nullInstanceFlag);
-    	 initialize(S);
+         bool nullInstanceFlag = true;
+         destroy(nullInstanceFlag);
+         initialize(S);
     }
 
     /**
-       Creates a SCC::SymFun instance from the initialization string S in which variables are specified in the std::vector of strings V.
+       Creates a SCC::SymFun instance from the initialization std::string S in which variables are specified in the std::vector of std::strings V.
        If the construction process fails, program execution stops and an error message is output.
        See initialize(...) member functions for creation with exception handling.
 
-       @arg V      : vector<string> specifying independent variable names
+       @arg V      : std::vector<std::string> specifying independent variable names
        @arg S      : std::string specifying the function
 
        <HR>
        Sample specification and use of a function of two variables x and y:
 
        \code
-       vector<string> V     = {"x","y"};         // x,y  = independent variable names
-       string S             = "x^2 + 2*y";       // specify a function
+       std::vector<std::string> V     = {"x","y"};    // x,y  = independent variable names
+       std::string S             = "x^2 + 2*y";       // specify a function
 
-       SCC::SymFun F(V,S);                       // create instance
+       SCC::SymFun F(V,S);                            // create instance
 
-       cout << F(2.0,3.0) << endl;               // evaluate and output result at (x,y) = (2.0,3.0)
+       std::cout << F(2.0,3.0) << std::endl;          // evaluate and output result at (x,y) = (2.0,3.0)
        \endcode
     */
 
-    SymFun(const vector<string>& V, const string& S)
+    SymFun(const std::vector<std::string>& V, const std::string& S)
     {
-    	bool nullInstanceFlag = true;
-    	destroy(nullInstanceFlag);
+        bool nullInstanceFlag = true;
+        destroy(nullInstanceFlag);
 
-    	initialize(V,S);
+        initialize(V,S);
     }
 
     /**
-    Creates a SymFun instance from the initialization string S. Variables names are specified by the elements of V
+    Creates a SymFun instance from the initialization std::string S. Variables names are specified by the elements of V
     and symbolic constant names are specified in C. The initial values of the symbolic constants are specified
     in the vector of double values Cvalues.
 
     If the construction process fails, program execution stops and an error message is output.
     See initialize(...) member functions for creation with exception handling.
 
-    @arg V       : vector<string> specifying independent variable names
+    @arg V       : std::vector<std::string> specifying independent variable names
     @arg S       : std::string specifying the function
-    @arg C       : vector<string> specifying symbolic constant names
-    @arg Cvalues : vector<double> specifying symbolic constants values
+    @arg C       : std::vector<std::string> specifying symbolic constant names
+    @arg Cvalues : std::vector<double> specifying symbolic constants values
 
     <HR>
     Sample demonstrating creation and usage of an instance that implements a*x^2 + b*x + c.
     \code
-	//
-	//  Create a SCC::SymFun that implements a*x^2 + b*x + c;
-	//  a, b, c being symbolic constants.
-	//
-	    vector<string>        V = {"x"};                 // specify variable name
-	    vector<string>        C = {"a","b","c"};         // specify constant names
-	    vector<double> Cvalues  = {1.0, 2.0, 1.0};       // initial values of a,b,c
+    //
+    //  Create a SCC::SymFun that implements a*x^2 + b*x + c;
+    //  a, b, c being symbolic constants.
+    //
+        std::vector<std::string>        V = {"x"};            // specify variable name
+        std::vector<std::string>        C = {"a","b","c"};    // specify constant names
+        std::vector<double> Cvalues  = {1.0, 2.0, 1.0};       // initial values of a,b,c
 
-	    string S = "a*x^2 + b*x + c";                    // initialization string
+        std::string S = "a*x^2 + b*x + c";                    // initialization std::string
 
-	    SCC::SymFun F(V,C,Cvalues, S);
-	    cout << F << endl << endl;                       // print out function
+        SCC::SymFun F(V,C,Cvalues, S);
+        std::cout << F << std::endl << std::endl;            // print out function
 
-	    cout << "The value of the function at x = 1.0 is "
-	         << F(1.0) << endl << endl;
+        std::cout << "The value of the function at x = 1.0 is "
+                  << F(1.0) << std::endl << std::endl;
 
-	    F.setConstantValue("a",1000.0);                 // reset the symbolic constants a and c
-	    F.setConstantValue("c",2000.0);
+        F.setConstantValue("a",1000.0);                 // reset the symbolic constants a and c
+        F.setConstantValue("c",2000.0);
 
-	    cout << F << endl << endl;                       // print out function
+        std::cout << F << std::endl << std::endl;      // print out function
 
-	    cout << "The value of the function at x = 1.0 is  "
-	         << F(1.0) << endl;
+        std::cout << "The value of the function at x = 1.0 is  "
+                  << F(1.0) << std::endl;
     \endcode
     */
 
-    SymFun(const vector<string>& V, const vector<string>& C, const vector<double>& Cvalues, const string& S)
+    SymFun(const std::vector<std::string>& V, const std::vector<std::string>& C, const std::vector<double>& Cvalues, const std::string& S)
     {
-    	bool nullInstanceFlag = true;
-    	destroy(nullInstanceFlag);
+        bool nullInstanceFlag = true;
+        destroy(nullInstanceFlag);
 
-    	initialize(V,C,Cvalues,S);
+        initialize(V,C,Cvalues,S);
     }
 
     /**
@@ -378,7 +376,7 @@ public  :
 
     /**
     Initializes an existing SCC::SymFun instance to be a function in one variable, x, where the function is
-    specified by the string S. If the initialization is not executed within a try/catch block
+    specified by the std::string S. If the initialization is not executed within a try/catch block
     and the construction process fails, then program execution stops and an error message is output.
     If executed within a try/catch block and the construction process fails, an exception is generated
     and appropriate exception handling can be implemented.
@@ -389,7 +387,7 @@ public  :
     <HR>
     Sample demonstrating initialization within a try/catch block.
     \code
-    string S             = "x^2";            // specifying a function in x
+    std::string S             = "x^2";       // specifying a function in x
 
     SCC::SymFun F;                           // Create instance
 
@@ -399,35 +397,35 @@ public  :
     }
     catch (const SCC::SymFunException& e)    // exception handling
     {
-          cerr << e.what() << endl;;
-          cerr << "XXXX Execution Terminated XXXXX" << endl;
+          cerr << e.what() << std::endl;;
+          cerr << "XXXX Execution Terminated XXXXX" << std::endl;
           exit(1);
     }
 
 
-    cout << "x^2 evaluated at 2.0 = " << F(2.0) << endl;  // evaluate and output
+    std::cout << "x^2 evaluated at 2.0 = " << F(2.0) << std::endl;  // evaluate and output
     \endcode
     */
 
-    int initialize(const string& S)
+    int initialize(const std::string& S)
     {
-    	bool nullInstanceFlag = true;
-    	destroy(nullInstanceFlag);
+        bool nullInstanceFlag = true;
+        destroy(nullInstanceFlag);
 
-    	return initialize(S.c_str());
+        return initialize(S.c_str());
     }
 
 
     /**
-       Initializes an existing SCC::SymFun instance to be the function specified by the string S in which variables are
-       specified in the std::vector of strings V.
+       Initializes an existing SCC::SymFun instance to be the function specified by the std::string S in which variables are
+       specified in the std::vector of std::strings V.
 
         If the initialization is not executed within a try/catch block
     and the construction process fails, then program execution stops and an error message is output.
     If executed within a try/catch block and the construction process fails, an exception is generated
     and appropriate exception handling can be implemented.
 
-       @arg V      : vector<string> specifying independent variable names
+       @arg V      : std::vector<std::string> specifying independent variable names
        @arg S      : std::string specifying the function
 
        <HR>
@@ -435,8 +433,8 @@ public  :
        exception handling.
 
        \code
-        vector<string> V     = {"x","y"};            // x,y  = independent variable names
-        string S             = "x^2 + 2*y";          // specify a function
+        std::vector<std::string> V     = {"x","y"}; // x,y  = independent variable names
+        std::string S             = "x^2 + 2*y";    // specify a function
 
         SCC::SymFun F;                               // Create instance
 
@@ -446,31 +444,31 @@ public  :
         }
         catch (const SCC::SymFunException& e)        // exception handling
         {
-          cerr << e.what() << endl;;
-          cerr << "XXXX Execution Terminated XXXXX" << endl;
+          cerr << e.what() << std::endl;;
+          cerr << "XXXX Execution Terminated XXXXX" << std::endl;
           exit(1);
         }
-        cout << F(2.0,3.0) << endl;               // evaluate and output result at (x,y) = (2.0,3.0)
+        std::cout << F(2.0,3.0) << std::endl;       // evaluate and output result at (x,y) = (2.0,3.0)
        \endcode
     */
-    int initialize(const vector<string>& V, const string& S)
+    int initialize(const std::vector<std::string>& V, const std::string& S)
     {
-    	bool nullInstanceFlag = true;
-    	destroy(nullInstanceFlag);
+        bool nullInstanceFlag = true;
+        destroy(nullInstanceFlag);
 
-    	int Vcount = V.size();
-    	vector<const char*> Varray(Vcount);
-    	for(int i = 0; i < Vcount; i++)
-    	{
-    		Varray[i] = V[i].c_str();
-    	}
-    	return initialize(&Varray[0],Vcount,S.c_str());
+        int Vcount = V.size();
+        std::vector<const char*> Varray(Vcount);
+        for(int i = 0; i < Vcount; i++)
+        {
+            Varray[i] = V[i].c_str();
+        }
+        return initialize(&Varray[0],Vcount,S.c_str());
     }
 
 
     /**
       Initializes an existing SCC::SymFun instance to be the function
-      specified in the  initialization string S. Variables names are specified by the elements of V and
+      specified in the  initialization std::string S. Variables names are specified by the elements of V and
       symbolic constant names are specified in C. The initial values of the symbolic constants are specified
       in the vector of doubles Cvalues.
 
@@ -479,10 +477,10 @@ public  :
     If executed within a try/catch block and the construction process fails, an exception is generated
     and appropriate exception handling can be implemented.
 
-      @arg V       : vector<string> specifying independent variable names
+      @arg V       : std::vector<std::string> specifying independent variable names
       @arg S       : std::string specifying the function
-      @arg C       : vector<string> specifying symbolic constant names
-      @arg Cvalues : vector<double> specifying symbolic constants values
+      @arg C       : std::vector<std::string> specifying symbolic constant names
+      @arg Cvalues : std::vector<double> specifying symbolic constants values
 
       <HR>
       Sample demonstrating initialization and usage of an instance that implements a*x^2 + b*x + c.
@@ -491,11 +489,11 @@ public  :
       //  Create a SCC::SymFun that implements a*x^2 + b*x + c;
       //  a, b, c being symbolic constants.
       //
-          vector<string>  V       = {"x"};                    // specify variable name
-          vector<string>  C       = {"a","b","c"};            // specify constant names
-          vector<double> Cvalues  = {1.0, 2.0, 1.0};          // initial values of a,b,c
+          std::vector<std::string>  V       = {"x"};               // specify variable name
+          std::vector<std::string>  C       = {"a","b","c"};       // specify constant names
+          std::vector<double> Cvalues  = {1.0, 2.0, 1.0};          // initial values of a,b,c
 
-          string S = "a*x^2 + b*x + c";                       // initialization string
+          std::string S = "a*x^2 + b*x + c";                       // initialization std::string
 
           SCC::SymFun F;
 
@@ -505,44 +503,44 @@ public  :
           }
           catch (const SCC::SymFunException& e)               // exception handling
           {
-          cerr << e.what() << endl;;
-          cerr << "XXXX Execution Terminated XXXXX" << endl;
+          cerr << e.what() << std::endl;;
+          cerr << "XXXX Execution Terminated XXXXX" << std::endl;
           exit(1);
           }
 
-          cout << F << endl << endl;                           // print out function
+          std::cout << F << std::endl << std::endl;           // print out function
 
-          cout << "The value of the function at x = 1.0 is "
-               << F(1.0) << endl << endl;
+          std::cout << "The value of the function at x = 1.0 is "
+                    << F(1.0) << std::endl << std::endl;
 
           F.setConstantValue("a",1000.0);                      // reset the symbolic constants a and c
           F.setConstantValue("c",2000.0);
 
-          cout << F << endl << endl;                           // print out function
+          std::cout << F << std::endl << std::endl;           // print out function
 
-          cout << "The value of the function at x = 1.0 is  "
-               << F(1.0) << endl;
+          std::cout << "The value of the function at x = 1.0 is  "
+                    << F(1.0) << std::endl;
       \endcode
      */
-    int initialize(const vector<string>& V, const vector<string>& C, const vector<double>& Cvalues, const string& S)
+    int initialize(const std::vector<std::string>& V, const std::vector<std::string>& C, const std::vector<double>& Cvalues, const std::string& S)
     {
-    	bool nullInstanceFlag = true;
-    	destroy(nullInstanceFlag);
+        bool nullInstanceFlag = true;
+        destroy(nullInstanceFlag);
 
-    	int Vcount = V.size();
-    	vector<const char*> Varray(Vcount);
-    	for(int i = 0; i < Vcount; i++)
-    	{
-    		Varray[i] = V[i].c_str();
-    	}
+        int Vcount = V.size();
+        std::vector<const char*> Varray(Vcount);
+        for(int i = 0; i < Vcount; i++)
+        {
+            Varray[i] = V[i].c_str();
+        }
 
-    	int Ccount = C.size();
-    	vector<const char*> Carray(Ccount);
-    	for(int i = 0; i < Ccount; i++)
-    	{
-    		Carray[i] = C[i].c_str();
-    	}
-    	return initialize(&Varray[0],Vcount,&Carray[0],Ccount,&Cvalues[0],S.c_str());
+        int Ccount = C.size();
+        std::vector<const char*> Carray(Ccount);
+        for(int i = 0; i < Ccount; i++)
+        {
+            Carray[i] = C[i].c_str();
+        }
+        return initialize(&Varray[0],Vcount,&Carray[0],Ccount,&Cvalues[0],S.c_str());
     }
 
 
@@ -603,8 +601,8 @@ public  :
     /**
      Returns the value of the SymFun using the variable value (x1,x2,x3).
      If an incorrect number of arguments specified and the program is compiled with the
-         pre-processor directive  _DEBUG defined, then an
-         error message is generated and execution halts.
+     pre-processor directive  _DEBUG defined, then an
+     error message is generated and execution halts.
     */
 
     double operator()(double x1, double x2, double x3) const
@@ -620,8 +618,8 @@ public  :
     /**
      Returns the value of the SymFun using the variable value (x1,x2,x3,x4).
      If an incorrect number of arguments specified and the program is compiled with the
-         pre-processor directive  _DEBUG defined, then an
-         error message is generated and execution halts.
+     pre-processor directive  _DEBUG defined, then an
+     error message is generated and execution halts.
     */
 
     double operator()(double x1, double x2, double x3, double x4) const
@@ -641,11 +639,11 @@ public  :
      If an incorrect number of arguments specified and the program is compiled with the pre-processor directive  _DEBUG defined, then an
      error message is generated and execution halts.
 
-     @arg x vector<double> array of values
+     @arg x std::vector<double> array of values
     */
-    double operator()(const vector<double>& x) const
+    double operator()(const std::vector<double>& x) const
     {
-    	int n = x.size();
+        int n = x.size();
         if(variableCount != n) argError(n, variableCount);
 
         int i;
@@ -681,13 +679,13 @@ public  :
 
 
     /**
-     Returns the string used to initialize the
+     Returns the std::string used to initialize the
      SCC::SymFun instance.
      */
 
-    string getConstructorString() const
+    std::string getConstructorString() const
     {
-        return string(constructorString);
+        return std::string(constructorString);
     }
 
     /**
@@ -705,9 +703,9 @@ public  :
     SCC::SymFun instance.
     */
 
-    string getVariableName(int i) const
+    std::string getVariableName(int i) const
     {
-          return string(variableNames[i]);
+          return std::string(variableNames[i]);
     }
 
     /**
@@ -726,9 +724,9 @@ public  :
      with the SCC::SymFun instance.
     */
 
-    string  getConstantName(int i) const
+    std::string  getConstantName(int i) const
     {
-          return string(constantNames[i]);
+          return std::string(constantNames[i]);
     }
 
     /**
@@ -744,10 +742,10 @@ public  :
      Returns the value of the specified symbolic constant
      associated with the SCC::SymFun instance.
 
-     @arg S: Character string with name of the symbolic constant.
+     @arg S: Character std::string with name of the symbolic constant.
     */
 
-    double getConstantValue(const string& S) const
+    double getConstantValue(const std::string& S) const
     {
         int i;
         for(i =0; i < constantCount; i++)
@@ -769,7 +767,7 @@ public  :
      @arg x: Double value specifying the new value of the constant.
     */
 
-    void setConstantValue(const string& C,double x)
+    void setConstantValue(const std::string& C,double x)
     {
            int i;
            for(i =0; i < constantCount; i++)
@@ -781,51 +779,51 @@ public  :
 
            for(int i = variableCount, j = 0; i < variableCount + constantCount; ++i,++j)
            {
-        	   evaluationData[i] = constantValues[j];
+               evaluationData[i] = constantValues[j];
            }
     }
 
     /**
-     Returns the names of the variables in a vector of strings.
+     Returns the names of the variables in a vector of std::strings.
      */
 
-    vector<string> getVariableNames() const
+    std::vector<std::string> getVariableNames() const
     {
-    	vector<string> variables(variableCount);
-    	for(int i = 0; i < variableCount; ++i)
-    	{
-    		variables[i] = string(variableNames[i]);
-    	}
+        std::vector<std::string> variables(variableCount);
+        for(int i = 0; i < variableCount; ++i)
+        {
+            variables[i] = std::string(variableNames[i]);
+        }
         return variables;
     }
 
     /**
-     Returns the names of the constants in a vector of strings.
+     Returns the names of the constants in a vector of std::strings.
      */
-    vector<string>  getConstantNames() const
+    std::vector<std::string>  getConstantNames() const
     {
-    	vector<string> constants(constantCount);
-    	for(int i = 0; i < constantCount; ++i)
-    	{
-    		constants[i] = string(constantNames[i]);
-    	}
+        std::vector<std::string> constants(constantCount);
+        for(int i = 0; i < constantCount; ++i)
+        {
+            constants[i] = std::string(constantNames[i]);
+        }
 
         return constants;
     }
 
 
     /**
-     Returns the names of the constant values in a vector of strings.
+     Returns the names of the constant values in a vector of std::strings.
      */
 
-    vector<double> getConstantValues() const
+    std::vector<double> getConstantValues() const
     {
 
-    	vector<double> constantVals(constantCount);
-    	for(int i = 0; i < constantCount; ++i)
-    	{
-    		constantVals[i] = constantValues[i];
-    	}
+        std::vector<double> constantVals(constantCount);
+        for(int i = 0; i < constantCount; ++i)
+        {
+            constantVals[i] = constantValues[i];
+        }
         return  constantVals;
     }
 
@@ -840,22 +838,22 @@ public  :
      that is bound to the evaluation operator of *this.
     */
 
-	std::function<double(double)> getEvaluationPtr1d() const
-	{
-	std::function<double(double)> F = [this](double x1) {return this->operator()(x1);};
-	return std::move(F);
-	};
+    std::function<double(double)> getEvaluationPtr1d() const
+    {
+    std::function<double(double)> F = [this](double x1) {return this->operator()(x1);};
+    return std::move(F);
+    };
 
 
     /**
      Returns a std::function instance of a double function of a two double values
      that is bound to the evaluation operator of *this.
     */
-	std::function<double(double,double)> getEvaluationPtr2d() const
-	{
-	std::function<double(double,double)> F = [this](double x1,double x2) {return this->operator()(x1,x2);};
-	return std::move(F);
-	};
+    std::function<double(double,double)> getEvaluationPtr2d() const
+    {
+    std::function<double(double,double)> F = [this](double x1,double x2) {return this->operator()(x1,x2);};
+    return std::move(F);
+    };
 
 
 
@@ -863,11 +861,11 @@ public  :
      Returns a std::function instance of a double function of a threedouble values
      that is bound to the evaluation operator of *this.
     */
-	std::function<double(double,double,double)> getEvaluationPtr3d() const
-	{
-	std::function<double(double,double,double)> F = [this](double x1,double x2,double x3) {return this->operator()(x1,x2,x3);};
-	return std::move(F);
-	};
+    std::function<double(double,double,double)> getEvaluationPtr3d() const
+    {
+    std::function<double(double,double,double)> F = [this](double x1,double x2,double x3) {return this->operator()(x1,x2,x3);};
+    return std::move(F);
+    };
 
 
 
@@ -876,11 +874,11 @@ public  :
      that is bound to the evaluation operator of *this.
     */
 
-	std::function<double(double,double,double,double)> getEvaluationPtr4d() const
-	{
-	std::function<double(double,double,double,double)> F = [this](double x1,double x2,double x3,double x4) {return this->operator()(x1,x2,x3,x4);};
-	return std::move(F);
-	};
+    std::function<double(double,double,double,double)> getEvaluationPtr4d() const
+    {
+    std::function<double(double,double,double,double)> F = [this](double x1,double x2,double x3,double x4) {return this->operator()(x1,x2,x3,x4);};
+    return std::move(F);
+    };
 
 
     /**
@@ -888,11 +886,11 @@ public  :
      that is bound to the evaluation operator of *this.
     */
 
-	std::function<double(vector<double>&)> getEvaluationPtrNd() const
-	{
-	std::function<double(vector<double>&)> F = [this](vector<double>& x) {return this->operator()(x);};
-	return std::move(F);
-	};
+    std::function<double(std::vector<double>&)> getEvaluationPtrNd() const
+    {
+    std::function<double(std::vector<double>&)> F = [this](std::vector<double>& x) {return this->operator()(x);};
+    return std::move(F);
+    };
 
     //
     //##################################################################
@@ -913,26 +911,26 @@ public  :
     //##################################################################
     //
     /**
-     Outputs the initialization string, the variable names, the symbolic
+     Outputs the initialization std::string, the variable names, the symbolic
      constant names and the symbolic constant values.
     */
-    friend ostream&  operator <<(ostream& out_stream, const SCC::SymFun& F)
+    friend std::ostream&  operator <<(std::ostream& out_stream, const SCC::SymFun& F)
     {
         int i;
-         out_stream << F.getConstructorString() << endl;
-        out_stream << " Variables : " << endl;
+        out_stream << F.getConstructorString() << std::endl;
+        out_stream << " Variables : " << std::endl;
 
         for(i = 0; i < F.getVariableCount(); i++)
         {
-        out_stream << F.getVariableName(i) << endl;
+        out_stream << F.getVariableName(i) << std::endl;
         }
 
         if(F.getConstantCount() > 0)
         {
-        out_stream << " Constant Values : " << endl;
+        out_stream << " Constant Values : " << std::endl;
         for(i = 0; i < F.getConstantCount(); i++)
         {
-        out_stream << F.getConstantName(i) << "  " << F.getConstantValue(i) << endl;
+        out_stream << F.getConstantName(i) << "  " << F.getConstantValue(i) << std::endl;
         }}
 
     return out_stream;
@@ -954,11 +952,11 @@ protected:
 
     void argError(int argC, int vCount) const
     {
-    	#ifdef _DEBUG
-        cerr << " Incorrect Number of Arguments in SymFun " << endl;
+        #ifdef _DEBUG
+        cerr << " Incorrect Number of Arguments in SymFun " << std::endl;
         cerr << " Called with " << argC << " arguments, expecting " << vCount;
-      	cerr << " Fatal Error : Program Stopped " << endl;
-    	exit(1);
+          cerr << " Fatal Error : Program Stopped " << std::endl;
+        exit(1);
         #endif
     }
 
@@ -1057,8 +1055,8 @@ protected:
 
     void destroy(bool nullInstanceFlag = false)
     {
-    	if(nullInstanceFlag)
-    	{
+        if(nullInstanceFlag)
+        {
         constructorString = 0;
 
         variableNames     = 0;
@@ -1079,7 +1077,7 @@ protected:
 
         LibFunctions       = 0;
         return;
-    	}
+        }
 
         int i;
         if(constructorString != 0) delete [] constructorString;
@@ -1136,11 +1134,11 @@ protected:
     /**
     Initialize an SymFun instance to one
     of a single variable, x, where the function is
-    specified by the null terminated string S. If the initialization fails,
+    specified by the null terminated std::string S. If the initialization fails,
     error diagnostics are output to the standard error stream
     (cerr) and the program returns an error value.
 
-    @arg S: Null terminated character string in the variable x that
+    @arg S: Null terminated character std::string in the variable x that
     specifies the function.
 
     @returns 0 (= no error) 1 (= error).
@@ -1163,14 +1161,14 @@ protected:
     }
     /**
     Initializes a SymFun instance to one
-    of Vcount variables from the initialization string S.
-    S is a null terminated character string. If the initialization fails,
+    of Vcount variables from the initialization std::string S.
+    S is a null terminated character std::string. If the initialization fails,
     error diagnostics are output to the standard error stream
     (cerr) and the program returns an error value.
 
-    @arg V      : Array of null terminated strings specifying independent variable names
+    @arg V      : Array of null terminated std::strings specifying independent variable names
     @arg Vcount : The number of independent variables
-    @arg S      : Null terminated character string specifying the function
+    @arg S      : Null terminated character std::string specifying the function
 
     @returns 0 (= no error) 1 (= error).
 
@@ -1185,12 +1183,12 @@ protected:
     int ierr = F.initialize(V,Vcount,S);// initialize
     if(ierr != 0)
     {
-    cerr << "Initialization of SymFun Failed" << endl;
+    cerr << "Initialization of SymFun Failed" << std::endl;
     exit(1);
     }
 
 
-    cout << F(2.0,3.0) << endl;        // evaluate and output result at (x,y) = (2.0,3.0)
+    std::cout << F(2.0,3.0) << std::endl;  // evaluate and output result at (x,y) = (2.0,3.0)
     \endcode
     */
 
@@ -1208,17 +1206,17 @@ protected:
     }
     /**
     Initializes a SymFun instance to one of Vcount variables and
-    Ccount symbolic constants from the initialization string S.
+    Ccount symbolic constants from the initialization std::string S.
     If the initialization fails, error diagnostics are output to the
     standard error stream (cerr) and the program returns an error value.
 
-    @arg V      : Array of null terminated strings specifying independent variable names
+    @arg V      : Array of null terminated std::strings specifying independent variable names
     @arg Vcount : The number of independent variables
-    @arg S      : Null terminated character string specifying the function
-    @arg V      : Array of null terminated strings specifying symbolic constant names
+    @arg S      : Null terminated character std::string specifying the function
+    @arg V      : Array of null terminated std::strings specifying symbolic constant names
     @arg Ccount : The number of symbolic constants
     @arg Cvalues: The values of the symbolic constants
-    @arg S      : Null terminated character string specifying the function
+    @arg S      : Null terminated character std::string specifying the function
 
     Sample:
     \code
@@ -1236,26 +1234,26 @@ protected:
 
         double Cvalues[] = {1.0, 2.0, 1.0};          // initial values of a,b,c
 
-        char* S = "a*x^2 + b*x + c";                 // initialization string
+        char* S = "a*x^2 + b*x + c";                 // initialization std::string
 
         int ierr = f.initialize(V,Vcount,C,Ccount,Cvalues, S);
         if(ierr != 0)
         {
-        cerr << "Initialization of SymFun Failed" << endl;
+        cerr << "Initialization of SymFun Failed" << std::endl;
         exit(1);
         }
 
-        cout << f << endl << endl;                    // print out function
+        std::cout << f << std::endl << std::endl;     // print out function
 
-        cout << "The value of the function at x = 1.0 is "
-             << f(1.0) << endl << endl;
+        std::cout << "The value of the function at x = 1.0 is "
+             << f(1.0) << std::endl << std::endl;
 
         f.setConstantValue("a",2.0);                  // reset the symbolic constant
                                                       // a to have the value 2.0
-        cout << f << endl << endl;                    // print out function
+        std::cout << f << std::endl << std::endl;     // print out function
 
-        cout << "The value of the function at x = 1.0 is  "
-             << f(1.0) << endl;
+        std::cout << "The value of the function at x = 1.0 is  "
+             << f(1.0) << std::endl;
     \endcode
     */
     int  initialize(const char** V, int Vcount, const char** C,
