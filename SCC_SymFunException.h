@@ -40,7 +40,7 @@ namespace SCC
     Sample code illustrating use of SymFunException within a try/catch block.
 
     \code
-    string S             = "x^2";            // specifying a function in x
+    std::string S        = "x^2";            // specifying a function in x
 
     SCC::SymFun F;                           // Create instance
 
@@ -50,13 +50,13 @@ namespace SCC
     }
     catch (const SCC::SymFunException& e)    // exception handling
     {
-          cerr << e.what() << endl;;
-          cerr << "XXXX Execution Terminated XXXXX" << endl;
+          std::cerr << e.what() << std::endl;;
+          std::cerr << "XXXX Execution Terminated XXXXX" << std::endl;
           exit(1);
     }
 
 
-    cout << "x^2 evaluated at 2.0 = " << F(2.0) << endl;  // evaluate and output
+    std::cout << "x^2 evaluated at 2.0 = " << F(2.0) << std::endl;  // evaluate and output
     \endcode
  */
 class SymFunException : public std::runtime_error
@@ -87,7 +87,7 @@ public:
   std::string getErrorInformation () const { return errorInfo;};
 
   /**
-    Returns function specification string that caused the error.
+    Returns function specification std::string that caused the error.
   */
 
   std::string getOffendingString  () const { return offendingString;}
@@ -100,16 +100,15 @@ protected :
    friend class ExpressionTransform;
    friend class SymFunUtility;
 
-   SymFunException ()
-  : runtime_error("SymFun error"),
-  errorMessage("SymFun error"),errorInfo(""),offendingString("")
-  {
+    SymFunException () : std::runtime_error("SymFun error"),
+    errorMessage("SymFun error"),errorInfo(""),offendingString("")
+    {
 	 setErrorReturn();
-  }
+    }
 
 
   SymFunException (const std::string& msg, const std::string& errInfo, const std::string& offString)
-  : runtime_error("SymFun error"),
+  : std::runtime_error("SymFun error"),
   errorMessage(msg),errorInfo(errInfo), offendingString(offString)
   {
   setErrorReturn();

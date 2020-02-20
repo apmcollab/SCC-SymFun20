@@ -28,7 +28,6 @@
 #include <cmath>
 
 #include "SCC_OperatorLib.h"
-using namespace std;
 
 #ifndef REAL_OPERATOR_LIB_
 #define REAL_OPERATOR_LIB_
@@ -187,64 +186,64 @@ public :
     {	*argPtr[2] =  (*argPtr[0])/(*argPtr[1]); }
 
     static void Exponentiate(double** argPtr)
-    {	*argPtr[2] =  pow(*argPtr[0],*argPtr[1]); }
+    {	*argPtr[2] =  std::pow(*argPtr[0],*argPtr[1]); }
 
     static void Sin(double** argPtr)
-    { 	*argPtr[1] = sin(*argPtr[0]); }
+    { 	*argPtr[1] = std::sin(*argPtr[0]); }
 
     static void Cos(double** argPtr)
-    {	*argPtr[1] = cos(*argPtr[0]); }
+    {	*argPtr[1] = std::cos(*argPtr[0]); }
 
     static void Tan(double** argPtr)
-    {	*argPtr[1] = tan(*argPtr[0]); }
+    {	*argPtr[1] = std::tan(*argPtr[0]); }
 
     static void Asin(double** argPtr)
-    {	*argPtr[1] = asin(*argPtr[0]); }
+    {	*argPtr[1] = std::asin(*argPtr[0]); }
 
     static void Acos(double** argPtr)
-    {	*argPtr[1] = acos(*argPtr[0]); }
+    {	*argPtr[1] = std::acos(*argPtr[0]); }
 
     static void Atan(double** argPtr)
-    {  *argPtr[1] = atan(*argPtr[0]); }
+    {  *argPtr[1] = std::atan(*argPtr[0]); }
 
     static void Atan2(double** argPtr)
-    { *argPtr[2] = atan2(*argPtr[0],*argPtr[1]);}
+    { *argPtr[2] = std::atan2(*argPtr[0],*argPtr[1]);}
 
     static void Sinh(double** argPtr)
-    {	*argPtr[1] = sinh(*argPtr[0]); }
+    {	*argPtr[1] = std::sinh(*argPtr[0]); }
 
     static void Cosh(double** argPtr)
-    {	*argPtr[1] = cosh(*argPtr[0]); }
+    {	*argPtr[1] = std::cosh(*argPtr[0]); }
 
     static void Tanh(double** argPtr)
-    {	*argPtr[1] = tanh(*argPtr[0]); }
+    {	*argPtr[1] = std::tanh(*argPtr[0]); }
 
     static void Ceil(double** argPtr)
-    {	*argPtr[1] = ceil(*argPtr[0]); }
+    {	*argPtr[1] = std::ceil(*argPtr[0]); }
 
     static void Exp(double** argPtr)
-    {	*argPtr[1] = exp(*argPtr[0]); }
+    {	*argPtr[1] = std::exp(*argPtr[0]); }
 
     static void Abs(double** argPtr)
-    {	*argPtr[1] = fabs(*argPtr[0]); }
+    {	*argPtr[1] = std::abs(*argPtr[0]); }
 
     static void Floor(double** argPtr)
     {	*argPtr[1] = floor(*argPtr[0]); }
 
     static void Fmod(double** argPtr)
-    { *argPtr[2] = fmod(*argPtr[0],*argPtr[1]);}
+    { *argPtr[2] = std::fmod(*argPtr[0],*argPtr[1]);}
 
     static void Log(double** argPtr)
-    {	*argPtr[1] = log(*argPtr[0]); }
+    {	*argPtr[1] = std::log(*argPtr[0]); }
 
     static void Log10(double** argPtr)
-    {	*argPtr[1] = log10(*argPtr[0]); }
+    {	*argPtr[1] = std::log10(*argPtr[0]); }
 
     static void Sqrt(double** argPtr)
-    {	*argPtr[1] = sqrt(*argPtr[0]); }
+    {	*argPtr[1] = std::sqrt(*argPtr[0]); }
 
     static void Pow(double** argPtr)
-    { *argPtr[2] = pow(*argPtr[0],*argPtr[1]);}
+    { *argPtr[2] = std::pow(*argPtr[0],*argPtr[1]);}
 
 
 

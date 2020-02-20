@@ -39,9 +39,7 @@
 #define COPYSTR(src,count,dst) strcpy(src,dst)
 #endif
 
-
-#include <string.h>
-using namespace std;
+#include <cstring>
 
 #include "SCC_OperatorLib.h"
 #include "SCC_SymFunException.h"
@@ -216,13 +214,13 @@ class  ExpressionTransform
 	    	delete [] S;
 	    	e.offendingString = inputS;
 	    	e.setErrorReturn();
-	    	cout << e.what() << endl;
+	    	std::cout << e.what() << std::endl;
 	    	throw e;
 	    }
 
 	    if(separateReturn != 0) {delete [] S; return separateReturn;}
 
-	//   cout << S << endl;
+	//   std::cout << S << std::endl;
 	//
 	// 	Insert string terminators between tokens
 	//
@@ -320,19 +318,19 @@ class  ExpressionTransform
 	 	for(i = 0; i < expressionCodeSize; i=i+2)
 	    {
 	    if(expressionCode[i] == VAR)
-	    { cout <<  expressionCode[i+1] << "  "; }
+	    { std::cout <<  expressionCode[i+1] << "  "; }
 	    else if(expressionCode[i] == DELIM)
 	    {
-	    if(expressionCode[i+1] == LEFTP)  cout << "(";
-	    if(expressionCode[i+1] == RIGHTP) cout << ")";
-	    if(expressionCode[i+1] == COMMA)  cout << ",";
+	    if(expressionCode[i+1] == LEFTP)  std::cout << "(";
+	    if(expressionCode[i+1] == RIGHTP) std::cout << ")";
+	    if(expressionCode[i+1] == COMMA)  std::cout << ",";
 	    }
 	    else if(expressionCode[i] > 0)
 	    {
-	    cout << opLib->getOperatorSymbol(expressionCode[i+1]);
-	    cout << expressionCode[i+1] << "  ";
+	    std::cout << opLib->getOperatorSymbol(expressionCode[i+1]);
+	    std::cout << expressionCode[i+1] << "  ";
 	    }}
-	    cout << endl << endl << endl;
+	    std::cout << std::endl << std::endl << std::endl;
 	*/
 	//
 	//
