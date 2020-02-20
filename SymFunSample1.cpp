@@ -2,7 +2,7 @@
 #include <cmath>
 #include <cstdio>
 #include <functional>
-using namespace std;
+ 
 
 #include "SCC_SymFun.h"
     
@@ -21,8 +21,8 @@ int main()
 //
 //  Create a SCC::SymFun that implements 2*x + sin(x)
 //
-    vector<string>      V = {"x"};               // x = independent variable
-    string functionString = "2.0*x+ sin(x)";    // string specifying fun ction
+    std::vector<std::string>      V = {"x"};               // x = independent variable
+    std::string functionString = "2.0*x+ sin(x)";    // std::string specifying fun ction
 
     SCC::SymFun f;
 
@@ -35,16 +35,16 @@ int main()
     }
     catch (const SCC::SymFunException& e)
     {
-          cerr << e.what() << endl;;
-          cerr << "XXXX Execution Terminated XXXXX" << endl;
+          std::cerr << e.what() << std::endl;;
+          std::cerr << "XXXX Execution Terminated XXXXX" << std::endl;
           //return 1;
     }
 
-    cout << "The function specified " << endl;
-    cout << f.getConstructorString()  << endl << endl;
+    std::cout << "The function specified " << std::endl;
+    std::cout << f.getConstructorString()  << std::endl << std::endl;
 
-    cout << "The value of the function at x = 1.0 is: ";
-    cout << f(1.0) << endl << endl;
+    std::cout << "The value of the function at x = 1.0 is: ";
+    std::cout << f(1.0) << std::endl << std::endl;
 
     //
     // Demonstrate how to capture an anonymous function reference
@@ -53,9 +53,9 @@ int main()
 
     std::function<double(double)> f_Ref = f.getEvaluationPtr1d();
 
-    cout << "The value of the function at x = 1.0 when f is  " << endl;
-    cout << "accessed via an anonymous function  : ";
-    cout << f_Ref(1.0) << endl << endl;
+    std::cout << "The value of the function at x = 1.0 when f is  " << std::endl;
+    std::cout << "accessed via an anonymous function  : ";
+    std::cout << f_Ref(1.0) << std::endl << std::endl;
 
     printf("XXXX Execution Complete XXXXX\n");
     return 0;

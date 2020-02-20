@@ -2,7 +2,7 @@
 #include <cmath>
 #include <cstdio>
 #include <string>
-using namespace std;
+ 
 
 #include "SCC_SymFun.h"
 
@@ -29,16 +29,16 @@ using namespace std;
 //
 int main()
 {
-    string functionString;      // string to hold function
-                                // specification
+    std::string functionString;      // std::string to hold function
+                                     // specification
 //
 //  Obtain Function Input
 //
-    cout << "Enter f(x) :" ;
-    getline (cin,functionString);
-    cout << endl;
+    std::cout << "Enter f(x) :" ;
+    getline (std::cin,functionString);
+    std::cout << std::endl;
 
-    vector<string>  V = {"x"};  // x = independent variable
+    std::vector<std::string>  V = {"x"};  // x = independent variable
 
     SCC::SymFun f;
 
@@ -51,21 +51,21 @@ int main()
     }
     catch (const SCC::SymFunException& e)
     {
-      cerr << e.what() << endl;;
-      cerr << "XXXX Execution Terminated XXXXX" << endl;
+      std::cerr << e.what() << std::endl;
+      std::cerr << "XXXX Execution Terminated XXXXX" << std::endl;
       return 1;
     }
 
-    cout << "The function specified : ";
-    cout << f.getConstructorString()  << endl << endl;
+    std::cout << "The function specified : ";
+    std::cout << f.getConstructorString()  << std::endl << std::endl;
 
     double x;
-    cout << "Enter evaluation point : " ;
-    cin  >> x;
-    cout << endl;
+    std::cout << "Enter evaluation point : " ;
+    std::cin  >> x;
+    std::cout << std::endl;
 
-    cout << "The value of the function at x = " << x << "  is: ";
-    cout << f(x) << endl << endl;
+    std::cout << "The value of the function at x = " << x << "  is: ";
+    std::cout << f(x) << std::endl << std::endl;
 
     printf("XXXX Execution Complete XXXXX\n");
     return 0;
