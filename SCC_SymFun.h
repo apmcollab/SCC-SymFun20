@@ -953,9 +953,9 @@ protected:
     void argError(int argC, int vCount) const
     {
         #ifdef _DEBUG
-        cerr << " Incorrect Number of Arguments in SymFun " << std::endl;
-        cerr << " Called with " << argC << " arguments, expecting " << vCount;
-          cerr << " Fatal Error : Program Stopped " << std::endl;
+        std::cerr << " Incorrect Number of Arguments in SymFun " << std::endl;
+        std::cerr << " Called with " << argC << " arguments, expecting " << vCount;
+        std::cerr << " Fatal Error : Program Stopped " << std::endl;
         exit(1);
         #endif
     }
