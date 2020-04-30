@@ -33,13 +33,15 @@
 // inserts strcpy calls.
 //
 
+#include <cstring>
+
 #ifdef _MSC_VER
-#define COPYSTR(src,count,dst) strcpy_s(src,count,dst)
+#define COPYSTR(dst,count,src) strcpy_s(dst,count,src)
 #else
-#define COPYSTR(src,count,dst) strcpy(src,dst)
+#define COPYSTR(dst,count,src) strcpy(dst,src)
 #endif
 
-#include <cstring>
+
 
 #include "SCC_OperatorLib.h"
 #include "SCC_SymFunException.h"

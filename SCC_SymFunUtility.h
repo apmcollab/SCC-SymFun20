@@ -36,22 +36,24 @@
 */
 #include "SCC_SymFun.h"
 
-//
-// strcpy_s is not implemented as part of C++11 (arrgh) so this macro
-// inserts strcpy calls.
-//
-
-#ifdef _MSC_VER
-#define COPYSTR(src,count,dst) strcpy_s(src,count,dst)
-#else
-#define COPYSTR(src,count,dst) strcpy(src,dst)
-#endif
 
 
 #include <string>
 #include <cstring>
 #include <cstdlib>
 #include <sstream>
+
+//
+// strcpy_s is not implemented as part of C++11 (arrgh) so this macro
+// inserts strcpy calls.
+//
+
+#ifdef _MSC_VER
+#define COPYSTR(dst,count,src) strcpy_s(dst,count,src)
+#else
+#define COPYSTR(dst,count,src) strcpy(dst,src)
+#endif
+
 
 #ifndef SYMUTILITY_
 #define SYMUTILITY_
