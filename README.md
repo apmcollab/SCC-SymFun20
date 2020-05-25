@@ -19,9 +19,9 @@ In addition to the samples contained within this repository, the documentation c
 ### Prerequisites
 C++11
 ### Versioning
-Release : 2.0.3
+Release : 2.0.4
 ### Date
-May 18, 2020
+May 25, 2020
 ### Authors
 Chris Anderson
 ### License

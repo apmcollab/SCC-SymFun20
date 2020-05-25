@@ -409,9 +409,7 @@ public  :
 
     int initialize(const std::string& S)
     {
-        bool nullInstanceFlag = true;
-        destroy(nullInstanceFlag);
-
+        destroy();
         return initialize(S.c_str());
     }
 
@@ -453,8 +451,7 @@ public  :
     */
     int initialize(const std::vector<std::string>& V, const std::string& S)
     {
-        bool nullInstanceFlag = true;
-        destroy(nullInstanceFlag);
+        destroy();
 
         int Vcount = V.size();
         std::vector<const char*> Varray(Vcount);
@@ -524,8 +521,7 @@ public  :
      */
     int initialize(const std::vector<std::string>& V, const std::vector<std::string>& C, const std::vector<double>& Cvalues, const std::string& S)
     {
-        bool nullInstanceFlag = true;
-        destroy(nullInstanceFlag);
+        destroy();
 
         int Vcount = V.size();
         std::vector<const char*> Varray(Vcount);
@@ -995,11 +991,16 @@ protected:
     //
     //  Allocate Storage and Initalize
     //
+
         constructorString = new char[strlen(S) + 1];
         COPYSTR(constructorString, strlen(S) + 1,S);
 
-        variableNames  = new char*[Vcount];
         variableCount  = Vcount;
+        if(Vcount > 0)
+        {
+           variableNames  = new char*[Vcount];
+        }
+
 
         int i;
         for(i = 0; i < Vcount; i++)
@@ -1008,9 +1009,13 @@ protected:
         COPYSTR(variableNames[i], strlen(V[i]) + 1,V[i]);
         }
 
-        constantNames  = new char*[Ccount];
         constantCount  = Ccount;
+
+        if(Ccount > 0)
+        {
+        constantNames  = new char*[Ccount];
         constantValues = new double[Ccount];
+        }
 
         for(i = 0; i < Ccount; i++)
         {
@@ -1020,7 +1025,8 @@ protected:
         }
 
         RealOperatorLib L;
-          ExpressionTransform T;
+        ExpressionTransform T;
+
         int expReturn;
 
         expReturn =  T.initialize(variableNames, variableCount, constantNames,
@@ -1040,7 +1046,12 @@ protected:
     //
         symbolCount    = T.getSymbolCount();
         char** TsNames = T.getSymbolNamesPtr();
+
+        if(symbolCount > 0)
+        {
         sNames      = new char*[symbolCount];
+        }
+
         for(i=0; i< symbolCount; i++)
         {
         sNames[i] = new char[strlen(TsNames[i])+1];
