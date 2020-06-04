@@ -19,7 +19,7 @@ In addition to the samples contained within this repository, the documentation c
 ### Prerequisites
 C++11
 ### Versioning
-Release : 2.0.4
+Release : 2.0.5
 ### Date
 May 25, 2020
 ### Authors

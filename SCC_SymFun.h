@@ -766,7 +766,7 @@ public  :
     void setConstantValue(const std::string& C,double x)
     {
            int i;
-           for(i =0; i < constantCount; i++)
+           for(int i =0; i < constantCount; i++)
            {
            if(strcmp(C.c_str(),constantNames[i]) == 0) constantValues[i] = x;
            }
