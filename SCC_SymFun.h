@@ -453,7 +453,7 @@ public  :
     {
         destroy();
 
-        int Vcount = V.size();
+        int Vcount = (int)V.size();
         std::vector<const char*> Varray(Vcount);
         for(int i = 0; i < Vcount; i++)
         {
@@ -523,14 +523,14 @@ public  :
     {
         destroy();
 
-        int Vcount = V.size();
+        int Vcount = (int)V.size();
         std::vector<const char*> Varray(Vcount);
         for(int i = 0; i < Vcount; i++)
         {
             Varray[i] = V[i].c_str();
         }
 
-        int Ccount = C.size();
+        int Ccount = (int)C.size();
         std::vector<const char*> Carray(Ccount);
         for(int i = 0; i < Ccount; i++)
         {
@@ -639,7 +639,7 @@ public  :
     */
     double operator()(const std::vector<double>& x) const
     {
-        int n = x.size();
+        int n = (int)x.size();
         if(variableCount != n) argError(n, variableCount);
 
         int i;
