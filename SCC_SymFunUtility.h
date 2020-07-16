@@ -155,11 +155,11 @@ SCC::SymFun symbolicDifferentiate(SCC::SymFun& F,const char* var)
     SCC::RealOperatorLib  L;
 
     long    i;
-    int     initReturn;
-    long    functionIndex;
-    long    argCount;
-    long    stringSize;
-    long    resultIndex;
+    int     initReturn    = 0;
+    long    functionIndex = 0;
+    long    argCount      = 0;
+    long    stringSize    = 0;
+    long    resultIndex   = 0;
 
     std::ostringstream sbuf;
     sbuf.str("");
@@ -208,8 +208,8 @@ SCC::SymFun symbolicDifferentiate(SCC::SymFun& F,const char* var)
     devaluationStrings[diffIndex] = new char[2];
     COPYSTR(devaluationStrings[diffIndex],2,"1");
 
-    long arg1Index;
-    long arg2Index;
+    long arg1Index = 0;
+    long arg2Index = 0;
     long sSize;
 
     int    iexp       = 0;
@@ -919,16 +919,16 @@ long* evaluationPriority)
 //
     long j;
 
-    long    functionIndex;
-    long         argIndex;
-    long         argCount;
+    long    functionIndex = 0;
+    long         argIndex = 0;
+    long         argCount = 0;
 
-    long    stringSize;
-    long    resultIndex;
+    long    stringSize  = 0;
+    long    resultIndex = 0;
 
-    long    leftPriority;
-    long    rghtPriority;
-    long    centPriority;
+    long    leftPriority = 0;
+    long    rghtPriority = 0;
+    long    centPriority = 0;
 
     int executionIndex = 0;
     while(executionIndex < F.executionArraySize)

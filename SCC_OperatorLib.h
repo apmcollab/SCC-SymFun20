@@ -38,10 +38,10 @@ public :
     virtual int  getUnaryOperatorIndex(const char*) const {return 0;};
     virtual int  getBinaryOperatorIndex(const char*) const {return 0;};
 
-    virtual int   getOperatorPriority(int index) const {return 0;};
-    virtual const char* getOperatorSymbol(int index) const {return 0;};
+    virtual int   getOperatorPriority(int) const {return 0;};
+    virtual const char* getOperatorSymbol(int) const {return 0;};
     virtual int   getOperatorCount() const {return 0;};
-    virtual int   getOperatorArgCount(int index) const {return 0;};
+    virtual int   getOperatorArgCount(int) const {return 0;};
 };
 }
 #endif

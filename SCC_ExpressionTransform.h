@@ -537,8 +537,10 @@ class  ExpressionTransform
 	//  paranthesis.
 	//
 	    int i; int j; int k;
-	    long argIndex; long argIndexLeft; long argIndexRight;
-	    int argCount;
+	    long argIndex       = 0; 
+		long argIndexLeft   = 0; 
+		long argIndexRight  = 0;
+	    int argCount        = 0;
 	//
 	//  remove ,'s
 	//
