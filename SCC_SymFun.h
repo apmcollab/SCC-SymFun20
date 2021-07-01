@@ -41,6 +41,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
+#include <map>
 
 #ifndef SYMBOLIC_FUNCTION_
 #define SYMBOLIC_FUNCTION_
@@ -748,9 +749,6 @@ public  :
         {
         if(strcmp(S.c_str(),constantNames[i]) == 0) return constantValues[i];
         }
-
-
-
         return 0.0;
     }
 
@@ -777,6 +775,42 @@ public  :
                evaluationData[i] = constantValues[j];
            }
     }
+
+
+    /**
+     Sets the value of the symbolic constants
+     associated with the SCC::SymFun instance.
+
+     @arg coefficientMap: std::map<std::string,double> with keys being
+     the constant names and values the symbolic constant values.
+    */
+
+    void setConstants(std::map<std::string,double> constantsMap)
+	{
+		for(std::map<std::string,double>::iterator it = constantsMap.begin(); it != constantsMap.end(); ++it)
+		{
+			this->setConstantValue(it->first,it->second); // Coefficients of an SCC::SymFun class are function constants
+		}
+	}
+
+    /**
+     Constructs and returns the symbolic constants
+     associated with the SCC::SymFun instance.
+
+     @arg coefficientMap: std::map<std::string,double> with keys being
+     the constant names and values the symbolic constant values.
+    */
+
+    std::map<std::string,double> getConstantsMap() const
+	{
+    	std::map<std::string,double> constantsMap;
+        int coefficientCount = this->getConstantCount();
+        for(int k = 0; k < coefficientCount; k++)
+        {
+        	constantsMap[this->getConstantName(k)] = this->getConstantValue(k);
+        }
+        return constantsMap;
+	}
 
     /**
      Returns the names of the variables in a vector of std::strings.
