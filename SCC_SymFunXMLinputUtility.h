@@ -1,5 +1,5 @@
 /*
- * SCC_SynFunXMLinputUtility.h
+ * SCC_SymFunXMLinputUtility.h
  *
  *  Created on: Jul 1, 2021
  *      Author: anderson
@@ -7,7 +7,7 @@
 
 //
 //##################################################################
-//                     SCC_SynFunXMLinputUtility.h
+//                     SCC_SymFunXMLinputUtility.h
 //##################################################################
 //
 // A class used to facilitate the input of SCC::SymFun instances
@@ -84,13 +84,13 @@
 
 namespace SCC
 {
-class SynFunXMLinputUtility
+class SymFunXMLinputUtility
 {
 
 public:
 
-	SynFunXMLinputUtility(){};
-	virtual ~SynFunXMLinputUtility(){};
+	SymFunXMLinputUtility(){};
+	virtual ~SymFunXMLinputUtility(){};
 
 	void initSymFunFromXML(const std::string& functionParamListName,const XML_ParameterListArray& paramList,
 	SCC::SymFun& F, bool verboseFlag = true)
@@ -118,7 +118,7 @@ public:
     		index = paramList.getParameterChildValue(variableNamesInput[k],"variables",functionParamListName);
     		if((index < 1)||(index > variableCount))
 		    {
-    			std::string errMsg = "\nSynFunXMLinputUtility.initSymFunFromXML error : illegal variable coordinate index \n";
+    			std::string errMsg = "\nSymFunXMLinputUtility.initSymFunFromXML error : illegal variable coordinate index \n";
     			errMsg.append("Offending variable :");
     			errMsg.append(variableNamesInput[k] + "\n");
     			errMsg.append("Offending index    :");
@@ -127,10 +127,7 @@ public:
 		    }
     		variableNames[index-1] = variableNamesInput[k];
     	}
-    	for(size_t k = 0; k < variableCount; k++)
-    	{
-    	printf("%s \n",variableNames[k].c_str());
-    	}
+    	if(verboseFlag) {for(size_t k = 0; k < variableCount; k++){printf("%s \n",variableNames[k].c_str());}}
     }
 
     // Capture the coefficient names and initial coefficient values
@@ -149,7 +146,8 @@ public:
     for(size_t k = 0; k < coefficientCount; k++)
     {
     	coefficientValues[k] = paramList.getParameterChildValue(coefficientNames[k],"symbolicConstants",functionParamListName);
-    	printf("%s  = %15.5e \n",coefficientNames[k].c_str(),coefficientValues[k]);
+    	if(verboseFlag)
+    	{printf("%s  = %15.5e \n",coefficientNames[k].c_str(),coefficientValues[k]);}
     }
     }
 
