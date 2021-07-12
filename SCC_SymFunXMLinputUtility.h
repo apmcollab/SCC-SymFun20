@@ -77,6 +77,7 @@
 #include <vector>
 #include <map>
 #include "XML_ParameterList/XML_ParameterListArray.h"
+#include "XML_ParameterList/XML_ParameterCheck.h"
 #include "SymFun20/SCC_SymFun.h"
 
 #ifndef SYM_FUN_XML_INPUT_UTILITY_
@@ -187,6 +188,26 @@ public:
     	}
     }
 	}
+
+
+    // Returns true on error found
+
+    bool checkParametersError(const XML_ParameterListArray& paramList,
+    const std::string& functionParamListName, std::string& errMsg)
+    {
+	XML_ParameterCheck xmlCheck;
+	bool errorFlag      = false;
+
+	std::string routineName = "SCC::SymFunXMLinputUtility";
+
+    // Single particle operator parameter check
+
+
+	errorFlag = xmlCheck.checkParameterError(routineName, paramList, "functionString",functionParamListName,errMsg)  || errorFlag;
+    errorFlag = xmlCheck.checkParameterError(routineName, paramList,   "variables",   functionParamListName,errMsg)  || errorFlag;
+
+	return errorFlag;
+}
 };
 } // Namespace SCC
 
