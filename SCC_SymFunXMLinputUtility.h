@@ -25,8 +25,6 @@
 //
 // If there are symbolic constants, then these must be specified along
 // with default values as child parameters of the symbolicConstants parameter.
-//
-//
 /*
 <A_TestFunction>
 
@@ -49,9 +47,7 @@
 <gamma value  = "1.0"  />
 </symbolicConstants>
 </A_TestFunction>
-
-//
-// Construction date: 07/01/2021
+*/
 /*
 #############################################################################
 #
