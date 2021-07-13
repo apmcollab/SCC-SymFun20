@@ -100,7 +100,7 @@ public:
 
     std::vector < std::string > variableNamesInput;
     std::vector < std::string > variableNames;
-    size_t variableCount;
+    long variableCount;
     if(paramList.isParameter("variables",functionParamListName))
     {
     	paramList.getParameterChildNames(0, "variables",functionParamListName,variableNamesInput);
@@ -110,7 +110,7 @@ public:
     	// Order variable names by coordinate index
 
     	int index;
-    	for(size_t k = 0; k < variableCount; k++)
+    	for(long k = 0; k < variableCount; k++)
     	{
     		index = paramList.getParameterChildValue(variableNamesInput[k],"variables",functionParamListName);
     		if((index < 1)||(index > variableCount))
@@ -124,7 +124,7 @@ public:
 		    }
     		variableNames[index-1] = variableNamesInput[k];
     	}
-    	if(verboseFlag) {for(size_t k = 0; k < variableCount; k++){printf("%s \n",variableNames[k].c_str());}}
+    	if(verboseFlag) {for(long k = 0; k < variableCount; k++){printf("%s \n",variableNames[k].c_str());}}
     }
 
     // Capture the coefficient names and initial coefficient values
@@ -132,7 +132,7 @@ public:
     std::vector <std::string > coefficientNames;
     std::vector <double>      coefficientValues;
 
-    int coefficientCount;
+    long coefficientCount;
 
     if(paramList.isParameter("symbolicConstants",functionParamListName))
     {
@@ -140,7 +140,7 @@ public:
     coefficientCount = coefficientNames.size();
     coefficientValues.resize(coefficientCount);
 
-    for(size_t k = 0; k < coefficientCount; k++)
+    for(long k = 0; k < coefficientCount; k++)
     {
     	coefficientValues[k] = paramList.getParameterChildValue(coefficientNames[k],"symbolicConstants",functionParamListName);
     	if(verboseFlag)
@@ -168,16 +168,16 @@ public:
     std::vector <std::string > coefficientNames;
     std::vector <double>      coefficientValues;
 
-    int coefficientCount;
+    long coefficientCount;
 
     coefficientMap.clear();
     if(paramList.isParameter("symbolicConstants",functionParamListName))
     {
     	paramList.getParameterChildNames(0, "symbolicConstants",functionParamListName,coefficientNames);
-    	coefficientCount = coefficientNames.size();
+    	coefficientCount = (long)coefficientNames.size();
     	coefficientValues.resize(coefficientCount);
 
-    	for(size_t k = 0; k < coefficientCount; k++)
+    	for(long k = 0; k < coefficientCount; k++)
     	{
     		coefficientValues[k] = paramList.getParameterChildValue(coefficientNames[k],"coefficients",functionParamListName);
     		coefficientMap[coefficientNames[k]] = coefficientValues[k];
