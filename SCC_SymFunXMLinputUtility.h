@@ -104,7 +104,7 @@ public:
     if(paramList.isParameter("variables",functionParamListName))
     {
     	paramList.getParameterChildNames(0, "variables",functionParamListName,variableNamesInput);
-    	variableCount = variableNamesInput.size();
+    	variableCount = (long)variableNamesInput.size();
     	variableNames.resize(variableCount);
 
     	// Order variable names by coordinate index
@@ -137,7 +137,7 @@ public:
     if(paramList.isParameter("symbolicConstants",functionParamListName))
     {
     paramList.getParameterChildNames(0, "symbolicConstants",functionParamListName,coefficientNames);
-    coefficientCount = coefficientNames.size();
+    coefficientCount = (long)coefficientNames.size();
     coefficientValues.resize(coefficientCount);
 
     for(long k = 0; k < coefficientCount; k++)
