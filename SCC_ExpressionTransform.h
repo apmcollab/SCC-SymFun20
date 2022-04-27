@@ -4,7 +4,7 @@
 //##################################################################
 //
 // Chris Anderson 9/10/96 (C) UCLA
-// Version 1/22/2009
+// Version 4/22/2022
 //
 /*
 #############################################################################
@@ -84,7 +84,7 @@ class  ExpressionTransform
 
 	    sNames             = new char*[symbolCount];
 
-	    int i;
+	    long i;
 	    for(i=0; i< executionArraySize; i++)
 	    executionArray[i] = E.executionArray[i];
 
@@ -98,17 +98,17 @@ class  ExpressionTransform
 	}
 
 
-	ExpressionTransform(char** V, int Vcount, char* S,
+	ExpressionTransform(char** V, long Vcount, char* S,
 	OperatorLib* OLib)
 	{
 	    char** C   = 0;
-	    int Ccount = 0;
+	    long Ccount = 0;
 	    opLib      = OLib;
 		createTransform(V, Vcount, C, Ccount, S);
 	}
 
-	ExpressionTransform(char** V, int Vcount,
-	char** C, int Ccount, char* S, OperatorLib* OLib)
+	ExpressionTransform(char** V, long Vcount,
+	char** C, long Ccount, char* S, OperatorLib* OLib)
 	{
 	    opLib      = OLib;
 		createTransform(V, Vcount, C, Ccount, S);
@@ -127,7 +127,7 @@ class  ExpressionTransform
 	{
 	   if(executionArray != 0) delete [] executionArray;
 
-	   int i;
+	   long i;
 	   if(sNames         != 0)
 	   {
 	   for(i=0; i< symbolCount; i++) if(sNames[i] != 0) delete [] sNames[i];
@@ -150,30 +150,30 @@ class  ExpressionTransform
 	//  		               INITIALIZE
 	//##################################################################
 	//
-	int initialize()
+	long initialize()
 	{
 	    destroy();
 	    return 0;
 	}
 
-	int initialize(char** V, int Vcount, char* S,
+	long initialize(char** V, long Vcount, char* S,
 	OperatorLib* OLib)
 	{
 	    destroy();
 	    char** C   = 0;
-	    int Ccount = 0;
+	    long Ccount = 0;
 	    opLib      = OLib;
 
-	    int    initReturn = createTransform(V, Vcount, C, Ccount, S);
+	    long    initReturn = createTransform(V, Vcount, C, Ccount, S);
 	    return initReturn;
 	}
 
-	int initialize(char** V, int Vcount, char** C, int Ccount, char* S,
+	long initialize(char** V, long Vcount, char** C, long Ccount, char* S,
 	OperatorLib* OLib)
 	{
 	    destroy();
 	    opLib       = OLib;
-	    int    initReturn = createTransform(V, Vcount, C, Ccount, S);
+	    long    initReturn = createTransform(V, Vcount, C, Ccount, S);
 	    return initReturn;
 	}
 	//
@@ -181,8 +181,8 @@ class  ExpressionTransform
 	//  		            CREATE_TRANSFROM
 	//##################################################################
 	//
-	int createTransform(char** V, int Vcount, char** C,
-			int Ccount, char* expressionString)
+	long createTransform(char** V, long Vcount, char** C,
+			long Ccount, char* expressionString)
 	{
 	//
 	//  Capture Input Data
@@ -194,7 +194,7 @@ class  ExpressionTransform
 	    char* inputS  = expressionString;
 	//
 	//
-	   int  i;  int j;  int k;
+	   long  i;  long j;  long k;
 	   char* Sptr;
 	//
 	//######################################################################
@@ -206,7 +206,7 @@ class  ExpressionTransform
 	    char* S             = new char[2*strlen(inputS) + 1];
 	    S[2*strlen(inputS)] = '\0';
 
-	    int separateReturn;
+	    long separateReturn;
 	    try
 	    {
 	    	separateReturn = separateIntoTokens(inputS,S);
@@ -254,7 +254,7 @@ class  ExpressionTransform
 	    long numericCount = 0;
 	    while(Sptr < (S + Ssize - 1))
 	    {
-	    if((((int(Sptr[0]) >= 48)&&(int(Sptr[0]) <= 57)))
+	    if((((long(Sptr[0]) >= 48)&&(long(Sptr[0]) <= 57)))
 	    ||(Sptr[0] == '.'))
 	    {numericCount++;}
 	    Sptr = Sptr + strlen(Sptr) + 1;
@@ -284,7 +284,7 @@ class  ExpressionTransform
 	    i = variableCount + constantCount;
 	    while(Sptr < (S + Ssize - 1))
 	    {
-	    if((((int(Sptr[0]) >= 48)&&(int(Sptr[0]) <= 57)))
+	    if((((long(Sptr[0]) >= 48)&&(long(Sptr[0]) <= 57)))
 	    ||(Sptr[0] == '.'))
 	    {
 	     sNames[i] = new char[strlen(Sptr) + 1];
@@ -296,7 +296,7 @@ class  ExpressionTransform
 
 	    long expressionCodeSize;
 
-	    int encodeReturn;
+	    long encodeReturn;
 
 	    try
 	    {
@@ -342,7 +342,7 @@ class  ExpressionTransform
 	//
 	//######################################################################
 	//
-	    int parenthesisCheck = 0;
+	    long parenthesisCheck = 0;
 		for(i = 0; i < expressionCodeSize; i+=2)
 	    {
 	    if(expressionCode[i] == DELIM) parenthesisCheck  += expressionCode[i+1];
@@ -410,12 +410,12 @@ class  ExpressionTransform
 	    long  executionIndex = 0;
 	    long  dataIndex      = symbolCount - 1;
 
-	    int   istart;
-	    int   iend;
+	    long  istart;
+	    long   iend;
 	//
 	//  Scan for paranthesis depth
 	//
-		int pDepth    = 0;
+		long pDepth    = 0;
 	    for(i=0; i < expressionCodeSize; i+=2)
 	    {
 	    if((expressionCode[i] == DELIM)&&(expressionCode[i+1]== LEFTP)) pDepth++;
@@ -423,8 +423,8 @@ class  ExpressionTransform
 	//
 	//  Setup up execution sequences for each depth of paranthesis
 	//
-	    int pIndex;  int jp;
-	    int sReturn;
+	    long pIndex;  long jp;
+	    long sReturn;
 	    for(k = pDepth; k >= 1; k--)
 	    {
 	     pIndex = 0;
@@ -487,7 +487,7 @@ class  ExpressionTransform
 	//
 	//  Check expressioncode to see only one operand left
 	//
-	    int resultCount = 0;
+	    long resultCount = 0;
 		for(i = 0; i < expressionCodeSize; i+=2)
 	    {
 	    if(expressionCode[i] != NOOP) resultCount++;
@@ -517,8 +517,8 @@ class  ExpressionTransform
 	//##################################################################
 	//
 
-	int setupEvaluation(long* expressionCode,
-	int istart, int iend,long* executionArray,long& executionIndex,
+	long setupEvaluation(long* expressionCode,
+	long istart, long iend,long* executionArray,long& executionIndex,
 	long& dataIndex)
 	{
 	//
@@ -536,11 +536,11 @@ class  ExpressionTransform
 	//  It is assumed that the input expression code contains no
 	//  paranthesis.
 	//
-	    int i; int j; int k;
+	    long i; long j; long k;
 	    long argIndex       = 0; 
 		long argIndexLeft   = 0; 
 		long argIndexRight  = 0;
-	    int argCount        = 0;
+	    long argCount        = 0;
 	//
 	//  remove ,'s
 	//
@@ -838,7 +838,7 @@ class  ExpressionTransform
 	//  		            ENCODE EXPRESSION
 	//##################################################################
 	//
-	int encodeExpression(char* S,long Ssize,
+	long encodeExpression(char* S,long Ssize,
 	char** sNames, long vCount, long cCount, long sCount,
 	long* expressionCode,long& expressionCodeSize)
 	{
@@ -867,21 +867,21 @@ class  ExpressionTransform
 	//
 	// Declare and initialize encoding variables
 	//
-	    int i;
+	    long i;
 	    char* Sptr;
-	    int tokenIndex = 0;
-	    int opIndex;
-	    int checkFlag;
-	    int unaryFlag;
+	    long tokenIndex = 0;
+	    long opIndex;
+	    long checkFlag;
+	    long unaryFlag;
 
-	    int unaryPlusIndex   = opLib->getUnaryOperatorIndex("+");
-	    int unaryMinusIndex  = opLib->getUnaryOperatorIndex("-");
-	    int binaryPlusIndex  = opLib->getBinaryOperatorIndex("+");
-	    int binaryMinusIndex = opLib->getBinaryOperatorIndex("-");
+	    long unaryPlusIndex   = opLib->getUnaryOperatorIndex("+");
+	    long unaryMinusIndex  = opLib->getUnaryOperatorIndex("-");
+	    long binaryPlusIndex  = opLib->getBinaryOperatorIndex("+");
+	    long binaryMinusIndex = opLib->getBinaryOperatorIndex("-");
 
-	    int binaryTimesIndex  = opLib->getOperatorIndex("*");
-	    int binaryDivideIndex = opLib->getOperatorIndex("/");
-	    int binaryExpoIndex   = opLib->getOperatorIndex("^");
+	    long binaryTimesIndex  = opLib->getOperatorIndex("*");
+	    long binaryDivideIndex = opLib->getOperatorIndex("/");
+	    long binaryExpoIndex   = opLib->getOperatorIndex("^");
 
 	    Sptr  = S;
 	    char* Stoken;
@@ -912,7 +912,7 @@ class  ExpressionTransform
 	//
 	//  Numerical Constants : Coded (VAR, Index of evaluationData value)
 	//
-	    else if((((int(Stoken[0]) >= 48)&&(int(Stoken[0]) <= 57)))
+	    else if((((long(Stoken[0]) >= 48)&&(long(Stoken[0]) <= 57)))
 	    ||(Stoken[0] == '.'))
 	    {
 	    for(i = cCount + vCount; i < sCount; i++)
@@ -927,8 +927,8 @@ class  ExpressionTransform
 	//
 	//  Symbolic Tokens
 	//
-	  	else if(    ((int(Stoken[0]) >= 65)&&(int(Stoken[0]) <= 90))
-	             || ((int(Stoken[0]) >= 97)&&(int(Stoken[0]) <= 122))
+	  	else if(    ((long(Stoken[0]) >= 65)&&(long(Stoken[0]) <= 90))
+	             || ((long(Stoken[0]) >= 97)&&(long(Stoken[0]) <= 122))
 	           )
 	    {
 	//
@@ -1110,7 +1110,7 @@ class  ExpressionTransform
 	//  		        SEPARATE_INTO_TOKENS
 	//##################################################################
 	//
-	int separateIntoTokens(char* sIn, char* S)
+	long separateIntoTokens(char* sIn, char* S)
 	{
 	//
 	//  This routine takes the string sIn and decomposes it into
@@ -1122,12 +1122,12 @@ class  ExpressionTransform
 	    char* sInput  = new char[strlen(sIn) + 1];  //  capture input string
 	    COPYSTR(sInput, strlen(sIn) + 1, sIn);                        //
 	//
-	    int i;
+	    long i;
 	//
 	//  Remove Spaces
 	//
-	    int  iMark = 0;
-	    for(i = 0; i < (int)strlen(sInput); i++)
+	    long  iMark = 0;
+	    for(i = 0; i < (long)strlen(sInput); i++)
 	    {
 	    if(sInput[i] != ' '){ sInput[iMark] = sInput[i]; iMark++; }
 	    }
@@ -1141,7 +1141,7 @@ class  ExpressionTransform
 	//
 	//  Operands and delimiters
 	//
-	    if( ((int(sInput[i]) >= 40)&&(int(sInput[i]) <= 45))
+	    if( ((long(sInput[i]) >= 40)&&(long(sInput[i]) <= 45))
 	        ||(sInput[i] == '/')
 	        ||(sInput[i] == '^')
 	      ) {S[iMark] = sInput[i]; iMark++; S[iMark] = ' '; iMark++;}
@@ -1150,14 +1150,14 @@ class  ExpressionTransform
 	//
 	//  Variables and symbolic constants
 	//
-	    if(    ((int(sInput[i]) >= 65)&&(int(sInput[i]) <= 90))
-	        || ((int(sInput[i]) >= 97)&&(int(sInput[i]) <= 122))
+	    if(    ((long(sInput[i]) >= 65)&&(long(sInput[i]) <= 90))
+	        || ((long(sInput[i]) >= 97)&&(long(sInput[i]) <= 122))
 	      )
 	    {
 	    while
-	      (    ((int(sInput[i]) >= 65)&&(int(sInput[i]) <= 90))
-	        || ((int(sInput[i]) >= 97)&&(int(sInput[i]) <= 122))
-	        || ((int(sInput[i]) >= 48)&&(int(sInput[i]) <= 57))
+	      (    ((long(sInput[i]) >= 65)&&(long(sInput[i]) <= 90))
+	        || ((long(sInput[i]) >= 97)&&(long(sInput[i]) <= 122))
+	        || ((long(sInput[i]) >= 48)&&(long(sInput[i]) <= 57))
 	      ){ S[iMark] = sInput[i]; iMark++; i++; }
 	      i--;
 	      S[iMark] = ' '; iMark++;
@@ -1166,10 +1166,10 @@ class  ExpressionTransform
 	//  Digits
 	//
 	    else
-	    if ((((int(sInput[i]) >= 48)&&(int(sInput[i]) <= 57)))
+	    if ((((long(sInput[i]) >= 48)&&(long(sInput[i]) <= 57)))
 	      ||(sInput[i] == '.'))
 	    {
-	     while((int(sInput[i]) >= 48)&&(int(sInput[i]) <= 57))
+	     while((long(sInput[i]) >= 48)&&(long(sInput[i]) <= 57))
 	     {S[iMark] = sInput[i]; iMark++; i++; }
 	 //
 	 //  Decimal Numbers
@@ -1177,7 +1177,7 @@ class  ExpressionTransform
 	     if(sInput[i] == '.')
 	     {
 	     S[iMark] = '.'; iMark++; i++;
-	     while((int(sInput[i]) >= 48)&&(int(sInput[i]) <= 57))
+	     while((long(sInput[i]) >= 48)&&(long(sInput[i]) <= 57))
 	     {S[iMark] = sInput[i]; iMark++; i++; }
 	     }
 	 //
@@ -1188,15 +1188,15 @@ class  ExpressionTransform
 	     S[iMark] = 'e'; iMark++; i++;
 	     if(sInput[i] == '+'){S[iMark] = '+'; iMark++; i++;}
 	     if(sInput[i] == '-'){S[iMark] = '-'; iMark++; i++;}
-	     while((int(sInput[i]) >= 48)&&(int(sInput[i]) <= 57))
+	     while((long(sInput[i]) >= 48)&&(long(sInput[i]) <= 57))
 	     {S[iMark] = sInput[i]; iMark++; i++; }
 	     }
 	     else
 	//
 	//   Check for invalid numeric input
 	//
-	     if(   ((int(sInput[i]) >= 65)&&(int(sInput[i]) <= 90))
-	        || ((int(sInput[i]) >= 97)&&(int(sInput[i]) <= 122))
+	     if(   ((long(sInput[i]) >= 65)&&(long(sInput[i]) <= 90))
+	        || ((long(sInput[i]) >= 97)&&(long(sInput[i]) <= 122))
 	     )
 	     {
 	     std::string symbol(1,sInput[i]);
@@ -1254,8 +1254,8 @@ class  ExpressionTransform
 //
     private :
 
-    int         variableCount;
-    int         constantCount;
+    long         variableCount;
+    long         constantCount;
 
     char**      sNames;
     long        symbolCount;

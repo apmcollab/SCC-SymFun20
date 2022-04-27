@@ -3,8 +3,10 @@
 //                     SCC_SymFun.h 
 //##################################################################
 //
-//    Chris Anderson 9/10/96 - 2020  (C) UCLA
+//    Chris Anderson 9/10/96 - 2022  (C) UCLA
 //
+//  Version 04/27/2022 :
+//  Converted all ints to long so now a uniform integer data type used
 //  Version 02/04/2020 : 
 //  Based upon 2016 version.
 //  Restricted constructors to use std::strings
@@ -120,7 +122,7 @@ public  :
      //
      //  Allocate Storage and Initalize
      //
-         int i;
+         long i;
 
          if(F.constructorString != 0)
          {
@@ -268,7 +270,7 @@ public  :
         std::string S = "a*x^2 + b*x + c";                    // initialization std::string
 
         SCC::SymFun F(V,C,Cvalues, S);
-        std::cout << F << std::endl << std::endl;            // print out function
+        std::cout << F << std::endl << std::endl;            // prlong out function
 
         std::cout << "The value of the function at x = 1.0 is "
                   << F(1.0) << std::endl << std::endl;
@@ -276,7 +278,7 @@ public  :
         F.setConstantValue("a",1000.0);                 // reset the symbolic constants a and c
         F.setConstantValue("c",2000.0);
 
-        std::cout << F << std::endl << std::endl;      // print out function
+        std::cout << F << std::endl << std::endl;      // prlong out function
 
         std::cout << "The value of the function at x = 1.0 is  "
                   << F(1.0) << std::endl;
@@ -294,7 +296,7 @@ public  :
     /**
       Initializes a SCC::SymFun instance to a null instance.
     */
-    int initialize()
+    long initialize()
     {
         destroy();
         return 0;
@@ -304,13 +306,13 @@ public  :
       Initializes the SCC::SymFun instance with F (creates a duplicate)
     */
 
-    int initialize(const SymFun& F)
+    long initialize(const SymFun& F)
     {
         destroy();
     //
     //  Allocate Storage and Initalize
     //
-        int i;
+        long i;
         if(F.constructorString != 0)
         {
         constructorString = new char[strlen(F.constructorString) + 1];
@@ -408,7 +410,7 @@ public  :
     \endcode
     */
 
-    int initialize(const std::string& S)
+    long initialize(const std::string& S)
     {
         destroy();
         return initialize(S.c_str());
@@ -450,13 +452,13 @@ public  :
         std::cout << F(2.0,3.0) << std::endl;       // evaluate and output result at (x,y) = (2.0,3.0)
        \endcode
     */
-    int initialize(const std::vector<std::string>& V, const std::string& S)
+    long initialize(const std::vector<std::string>& V, const std::string& S)
     {
         destroy();
 
-        int Vcount = (int)V.size();
+        long Vcount = (int)V.size();
         std::vector<const char*> Varray(Vcount);
-        for(int i = 0; i < Vcount; i++)
+        for(long i = 0; i < Vcount; i++)
         {
             Varray[i] = V[i].c_str();
         }
@@ -506,7 +508,7 @@ public  :
           exit(1);
           }
 
-          std::cout << F << std::endl << std::endl;           // print out function
+          std::cout << F << std::endl << std::endl;           // prlong out function
 
           std::cout << "The value of the function at x = 1.0 is "
                     << F(1.0) << std::endl << std::endl;
@@ -514,26 +516,26 @@ public  :
           F.setConstantValue("a",1000.0);                      // reset the symbolic constants a and c
           F.setConstantValue("c",2000.0);
 
-          std::cout << F << std::endl << std::endl;           // print out function
+          std::cout << F << std::endl << std::endl;           // prlong out function
 
           std::cout << "The value of the function at x = 1.0 is  "
                     << F(1.0) << std::endl;
       \endcode
      */
-    int initialize(const std::vector<std::string>& V, const std::vector<std::string>& C, const std::vector<double>& Cvalues, const std::string& S)
+    long initialize(const std::vector<std::string>& V, const std::vector<std::string>& C, const std::vector<double>& Cvalues, const std::string& S)
     {
         destroy();
 
-        int Vcount = (int)V.size();
+        long Vcount = (int)V.size();
         std::vector<const char*> Varray(Vcount);
-        for(int i = 0; i < Vcount; i++)
+        for(long i = 0; i < Vcount; i++)
         {
             Varray[i] = V[i].c_str();
         }
 
-        int Ccount = (int)C.size();
+        long Ccount = (int)C.size();
         std::vector<const char*> Carray(Ccount);
-        for(int i = 0; i < Ccount; i++)
+        for(long i = 0; i < Ccount; i++)
         {
             Carray[i] = C[i].c_str();
         }
@@ -640,10 +642,10 @@ public  :
     */
     double operator()(const std::vector<double>& x) const
     {
-        int n = (int)x.size();
+        long n = (int)x.size();
         if(variableCount != n) argError(n, variableCount);
 
-        int i;
+        long i;
         for(i = 0; i < n; i++) evaluationData[i] = x[i];
         return evaluate();
     }
@@ -660,11 +662,11 @@ public  :
      @arg x poiner to a double array
      @arg n the number of elements in x
     */
-    double operator()(double*x, int n) const
+    double operator()(double*x, long n) const
     {
          if(variableCount != n) argError(n, variableCount);
 
-        int i;
+        long i;
         for(i = 0; i < n; i++) evaluationData[i] = x[i];
         return evaluate();
     }
@@ -689,7 +691,7 @@ public  :
      Returns the number of variables associated with the
      SCC::SymFun instance.
     */
-    int getVariableCount() const
+    long getVariableCount() const
     {
           return variableCount;
     }
@@ -700,7 +702,7 @@ public  :
     SCC::SymFun instance.
     */
 
-    std::string getVariableName(int i) const
+    std::string getVariableName(long i) const
     {
           return std::string(variableNames[i]);
     }
@@ -710,7 +712,7 @@ public  :
      SCC::SymFun instance.
      */
 
-    int getConstantCount() const
+    long getConstantCount() const
     {
           return constantCount;
     }
@@ -721,7 +723,7 @@ public  :
      with the SCC::SymFun instance.
     */
 
-    std::string  getConstantName(int i) const
+    std::string  getConstantName(long i) const
     {
           return std::string(constantNames[i]);
     }
@@ -730,7 +732,7 @@ public  :
      Returns the value of the ith symbolic constant
      associated with the  SCC::SymFun instance.
     */
-    double  getConstantValue(int i) const
+    double  getConstantValue(long i) const
     {
           return constantValues[i];
     }
@@ -744,7 +746,7 @@ public  :
 
     double getConstantValue(const std::string& S) const
     {
-        int i;
+        long i;
         for(i =0; i < constantCount; i++)
         {
         if(strcmp(S.c_str(),constantNames[i]) == 0) return constantValues[i];
@@ -763,14 +765,14 @@ public  :
 
     void setConstantValue(const std::string& C,double x)
     {
-           for(int i =0; i < constantCount; i++)
+           for(long i =0; i < constantCount; i++)
            {
            if(strcmp(C.c_str(),constantNames[i]) == 0) constantValues[i] = x;
            }
 
            // Reset evaluation data to reflect change in values
 
-           for(int i = variableCount, j = 0; i < variableCount + constantCount; ++i,++j)
+           for(long i = variableCount, j = 0; i < variableCount + constantCount; ++i,++j)
            {
                evaluationData[i] = constantValues[j];
            }
@@ -804,8 +806,8 @@ public  :
     std::map<std::string,double> getConstantsMap() const
 	{
     	std::map<std::string,double> constantsMap;
-        int coefficientCount = this->getConstantCount();
-        for(int k = 0; k < coefficientCount; k++)
+        long coefficientCount = this->getConstantCount();
+        for(long k = 0; k < coefficientCount; k++)
         {
         	constantsMap[this->getConstantName(k)] = this->getConstantValue(k);
         }
@@ -819,7 +821,7 @@ public  :
     std::vector<std::string> getVariableNames() const
     {
         std::vector<std::string> variables(variableCount);
-        for(int i = 0; i < variableCount; ++i)
+        for(long i = 0; i < variableCount; ++i)
         {
             variables[i] = std::string(variableNames[i]);
         }
@@ -832,7 +834,7 @@ public  :
     std::vector<std::string>  getConstantNames() const
     {
         std::vector<std::string> constants(constantCount);
-        for(int i = 0; i < constantCount; ++i)
+        for(long i = 0; i < constantCount; ++i)
         {
             constants[i] = std::string(constantNames[i]);
         }
@@ -849,7 +851,7 @@ public  :
     {
 
         std::vector<double> constantVals(constantCount);
-        for(int i = 0; i < constantCount; ++i)
+        for(long i = 0; i < constantCount; ++i)
         {
             constantVals[i] = constantValues[i];
         }
@@ -945,7 +947,7 @@ public  :
     */
     friend std::ostream&  operator <<(std::ostream& out_stream, const SCC::SymFun& F)
     {
-        int i;
+        long i;
         out_stream << F.getConstructorString() << std::endl;
         out_stream << " Variables : " << std::endl;
 
@@ -979,7 +981,7 @@ public  :
 
 protected:
 
-    void argError(int argC, int vCount) const
+    void argError(long argC, long vCount) const
     {
         #ifdef _DEBUG
         std::cerr << " Incorrect Number of Arguments in SymFun " << std::endl;
@@ -994,32 +996,32 @@ protected:
     SymFun(char const* S)
     {
         const char* V []      = {"x"};
-        int Vcount            = 1;
+        long Vcount            = 1;
         const char** C        = 0;
-        int Ccount            = 0;
+        long Ccount            = 0;
         double* Cvalues       = 0;
 
         create(V,Vcount,C,Ccount, Cvalues, S);
     }
 
 
-    SymFun(const char** V, int Vcount, const char* S)
+    SymFun(const char** V, long Vcount, const char* S)
     {
 
         const char** C        = 0;
-        int Ccount            = 0;
+        long Ccount            = 0;
         double* Cvalues       = 0;
         create(V,Vcount,C,Ccount, Cvalues, S);
     }
 
-    SymFun(const char** V, int Vcount, const char** C,
-    int Ccount, double const* Cvalues, char const* S)
+    SymFun(const char** V, long Vcount, const char** C,
+    long Ccount, double const* Cvalues, char const* S)
     {
         create(V,Vcount,C,Ccount, Cvalues, S);
     }
 
-    int create(const char** V, int Vcount, const char** C,
-    int Ccount, double const* Cvalues, char const* S)
+    long create(const char** V, long Vcount, const char** C,
+    long Ccount, double const* Cvalues, char const* S)
     {
     //
     //  Allocate Storage and Initalize
@@ -1035,7 +1037,7 @@ protected:
         }
 
 
-        int i;
+        long i;
         for(i = 0; i < Vcount; i++)
         {
         variableNames[i] = new char[strlen(V[i]) + 1];
@@ -1060,7 +1062,7 @@ protected:
         RealOperatorLib L;
         ExpressionTransform T;
 
-        int expReturn;
+        long expReturn;
 
         expReturn =  T.initialize(variableNames, variableCount, constantNames,
                      constantCount,constructorString,&L);
@@ -1123,7 +1125,7 @@ protected:
         return;
         }
 
-        int i;
+        long i;
         if(constructorString != 0) delete [] constructorString;
 
         if(variableNames != 0)
@@ -1188,17 +1190,17 @@ protected:
     @returns 0 (= no error) 1 (= error).
     */
 
-    int initialize(char const* S)
+    long initialize(char const* S)
     {
         destroy();
         const char*V []  = {"x"};
-        int Vcount = 1;
+        long Vcount = 1;
 
         const char** C        = 0;
-        int Ccount            = 0;
+        long Ccount            = 0;
         const double* Cvalues = 0;
 
-        int  cReturn;
+        long  cReturn;
         cReturn = create(V,Vcount,C,Ccount, Cvalues, S);
         if(cReturn != 0) return cReturn;
         return 0;
@@ -1220,11 +1222,11 @@ protected:
 
     \code
     SymFun F;              // Create null instance
-    int Vcount = 2;                     // number of independent variables
+    long Vcount = 2;                     // number of independent variables
     char*V []  = {"x","y"};             // x,y  = independent variable names
     char*S     = "x^2 + 2*y";           // specify a function
 
-    int ierr = F.initialize(V,Vcount,S);// initialize
+    long ierr = F.initialize(V,Vcount,S);// initialize
     if(ierr != 0)
     {
     cerr << "Initialization of SymFun Failed" << std::endl;
@@ -1237,13 +1239,13 @@ protected:
     */
 
 
-    int initialize(const char** V, int Vcount, char const* S)
+    long initialize(const char** V, long Vcount, char const* S)
     {
         destroy();
         const char** C  = 0;
-        int Ccount      = 0;
+        long Ccount      = 0;
         double* Cvalues = 0;
-        int  cReturn;
+        long  cReturn;
         cReturn = create(V,Vcount,C,Ccount, Cvalues, S);
         if(cReturn != 0) return cReturn;
         return 0;
@@ -1270,9 +1272,9 @@ protected:
     //
         SymFun f;                       // create instance
 
-        int Vcount       = 1;                        // number of independent variables
+        long Vcount       = 1;                        // number of independent variables
         char*V []        = {"x"};                    // specify variable name
-        int Ccount       = 3;                        // number of symbolic constants
+        long Ccount       = 3;                        // number of symbolic constants
 
         char*C []        = {"a","b","c"};            // specify constant names
 
@@ -1280,31 +1282,31 @@ protected:
 
         char* S = "a*x^2 + b*x + c";                 // initialization std::string
 
-        int ierr = f.initialize(V,Vcount,C,Ccount,Cvalues, S);
+        long ierr = f.initialize(V,Vcount,C,Ccount,Cvalues, S);
         if(ierr != 0)
         {
         cerr << "Initialization of SymFun Failed" << std::endl;
         exit(1);
         }
 
-        std::cout << f << std::endl << std::endl;     // print out function
+        std::cout << f << std::endl << std::endl;     // prlong out function
 
         std::cout << "The value of the function at x = 1.0 is "
              << f(1.0) << std::endl << std::endl;
 
         f.setConstantValue("a",2.0);                  // reset the symbolic constant
                                                       // a to have the value 2.0
-        std::cout << f << std::endl << std::endl;     // print out function
+        std::cout << f << std::endl << std::endl;     // prlong out function
 
         std::cout << "The value of the function at x = 1.0 is  "
              << f(1.0) << std::endl;
     \endcode
     */
-    int  initialize(const char** V, int Vcount, const char** C,
-    int Ccount, double const* Cvalues, char const* S)
+    long initialize(const char** V, long Vcount, const char** C,
+    long Ccount, double const* Cvalues, char const* S)
     {
         destroy();
-        int  cReturn;
+        long  cReturn;
         cReturn = create(V,Vcount,C,Ccount, Cvalues, S);
         if(cReturn != 0) return cReturn;
         return 0;
@@ -1335,7 +1337,7 @@ protected:
     {
         long symbolCount = T.getSymbolCount();
         char**sNames     = T.getSymbolNamesPtr();
-        int i;  int j;
+        long i;  long j;
 
         if(variableCount != 0)
         for(i = 0; i < variableCount; i++)
@@ -1352,7 +1354,7 @@ protected:
     void  initializeExecutionArray(const ExpressionTransform& T)
     {
         long* executionArrayPtr = T.getExecutionArrayPtr();
-        int i;
+        long i;
         for(i=0; i < executionArraySize; i++)
         {executionArray[i] = executionArrayPtr[i];
         }
@@ -1360,7 +1362,7 @@ protected:
 
     void  setConstantEvaluationData()
     {
-        int i; int j;
+        long i; long j;
 
         for(i = variableCount,j = 0; i < variableCount + constantCount; i++,j++)
         evaluationData[i] = constantValues[j];
@@ -1369,13 +1371,13 @@ protected:
 
     double evaluate() const
     {
-        int j;
+        long j;
         double* argData[10];   // limit of 10 args for now
 
-        int functionIndex;
-        int argCount;
+        long functionIndex;
+        long argCount;
 
-        int executionIndex = 0;
+        long executionIndex = 0;
         while(executionIndex < executionArraySize)
         {
         functionIndex = executionArray[executionIndex]; executionIndex++;
@@ -1395,10 +1397,10 @@ protected:
     char*       constructorString;
 
     char**      variableNames;
-    int         variableCount;
+    long         variableCount;
 
     char**      constantNames;
-    int         constantCount;
+    long        constantCount;
     double*     constantValues;
 
     long        symbolCount;      // total number of variables, symbolic constants, 

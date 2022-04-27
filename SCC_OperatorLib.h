@@ -34,14 +34,14 @@ class  OperatorLib
 
 public :
 
-    virtual int  getOperatorIndex(const char*) const {return 0;};
-    virtual int  getUnaryOperatorIndex(const char*) const {return 0;};
-    virtual int  getBinaryOperatorIndex(const char*) const {return 0;};
+    virtual long  getOperatorIndex(const char*) const {return 0;};
+    virtual long  getUnaryOperatorIndex(const char*) const {return 0;};
+    virtual long  getBinaryOperatorIndex(const char*) const {return 0;};
 
-    virtual int   getOperatorPriority(int) const {return 0;};
-    virtual const char* getOperatorSymbol(int) const {return 0;};
-    virtual int   getOperatorCount() const {return 0;};
-    virtual int   getOperatorArgCount(int) const {return 0;};
+    virtual long   getOperatorPriority(long) const {return 0;};
+    virtual const char* getOperatorSymbol(long) const {return 0;};
+    virtual long   getOperatorCount() const {return 0;};
+    virtual long   getOperatorArgCount(long) const {return 0;};
 };
 }
 #endif

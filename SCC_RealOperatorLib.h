@@ -1,13 +1,14 @@
 
 //
-// Author: Chris Anderson  
-// (C) UCLA 2012 
+// Author: Chris Anderson
+// Version 4/22/2022
+//
 //
 
 /*
 #############################################################################
 #
-# Copyright 1996-2019 Chris Anderson
+# Copyright 1996-2022 Chris Anderson
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the Lesser GNU General Public License as published by
@@ -48,25 +49,25 @@ public :
 	    "ceil","exp","abs","floor","fmod","log","log10","sqrt","pow"};
 
 	     Symbols = new const char*[operatorCount];
-	     for(int i = 0; i <  operatorCount; ++i)
+	     for(long i = 0; i <  operatorCount; ++i)
 	     {
 	    	 Symbols[i] = LibSymbols[i];
 	     }
 
-	     int PriorityValues [] =
+	     long PriorityValues [] =
 	     {3,3,5,5,4,4,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 
-	     Priority = new int[operatorCount];
-	     for(int i = 0; i <  operatorCount; ++i)
+         Priority = new long[operatorCount];
+	     for(long i = 0; i <  operatorCount; ++i)
 	     {
 	    	 Priority[i] = PriorityValues [i];
 	     }
 
-	     int  ArgCountValues[] =
+	     long ArgCountValues[] =
 	     {1,1,2,2,2,2,2,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2,1,1,1,2};
-	     ArgCount = new int[operatorCount];
+	     ArgCount = new long[operatorCount];
 
-	     for(int i = 0; i <  operatorCount; ++i)
+	     for(long i = 0; i <  operatorCount; ++i)
 	     {
 	    	 ArgCount[i] = ArgCountValues[i];
 	     }
@@ -103,7 +104,7 @@ public :
 	     };
 
 	     FunctionArray = new void*[operatorCount];
-	     for(int i = 0; i <  operatorCount; ++i)
+	     for(long i = 0; i <  operatorCount; ++i)
 	     {
 	    	 FunctionArray[i] = FunctionArrayValues[i];
 	     }
@@ -118,10 +119,10 @@ public :
 	}
 
 
-    int getOperatorIndex(const char* Sym) const
+    long getOperatorIndex(const char* Sym) const
     {
-        int ireturn = -1;
-        int i;
+        long ireturn = -1;
+        long i;
     	for(i=0; i< operatorCount; i++)
         {
     	if(strcmp(Sym,Symbols[i]) == 0) ireturn = i;
@@ -129,38 +130,38 @@ public :
         return ireturn;
     }
 
-    int getUnaryOperatorIndex(const char* Sym) const
+    long getUnaryOperatorIndex(const char* Sym) const
     {
-        int ireturn = -1;
+        long ireturn = -1;
     	if(strcmp(Sym,"+") == 0) ireturn = 0;
         if(strcmp(Sym,"-") == 0) ireturn = 1;
         return ireturn;
     }
 
-    int getBinaryOperatorIndex(const char* Sym) const
+    long getBinaryOperatorIndex(const char* Sym) const
     {
-        int ireturn = -1;
+        long ireturn = -1;
     	if(strcmp(Sym,"+") == 0) ireturn = 2;
         if(strcmp(Sym,"-") == 0) ireturn = 3;
         return ireturn;
     }
 
-    int getOperatorPriority(int index) const
+    long getOperatorPriority(long index) const
     {
      	return Priority[index];
     }
 
-    int getOperatorArgCount(int index) const
+    long getOperatorArgCount(long index) const
     {
      	return ArgCount[index];
     }
 
-    int getOperatorCount() const
+    long getOperatorCount() const
     {
      	return operatorCount;
     }
 
-    const char* getOperatorSymbol(int index) const
+    const char* getOperatorSymbol(long index) const
     {
      	return Symbols[index];
     }
@@ -247,12 +248,12 @@ public :
 
 
 
-    constexpr static int  operatorCount = 26;
+    constexpr static long  operatorCount = 26;
 
-    void**  FunctionArray;
-    const char** Symbols;
-    int*         Priority;
-    int*         ArgCount;
+    void**   FunctionArray;
+    const char**   Symbols;
+    long*         Priority;
+    long*         ArgCount;
 };
 }
 #endif
