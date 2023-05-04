@@ -90,7 +90,7 @@ public:
 	virtual ~SymFunXMLinputUtility(){};
 
 	void initSymFunFromXML(const std::string& functionParamListName,const XML_ParameterListArray& paramList,
-	SCC::SymFun& F, bool verboseFlag = true)
+	SCC::SymFun& F, bool verboseFlag = false)
 	{
    // Capture function string and replace any carriage returns and/or line feeds with spaces
 
@@ -157,6 +157,9 @@ public:
     	  errMsg.append("\n");
           throw std::runtime_error(errMsg);
     }
+
+    if(verboseFlag)
+    {printf("F = %s \n",(F.getConstructorString()).c_str());}
 
 	}
 
