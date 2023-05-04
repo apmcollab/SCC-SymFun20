@@ -199,8 +199,6 @@ public:
 
 	std::string routineName = "SCC::SymFunXMLinputUtility";
 
-    // Single particle operator parameter check
-
 
 	errorFlag = xmlCheck.checkParameterError(routineName, paramList, "functionString",functionParamListName,errMsg)  || errorFlag;
     errorFlag = xmlCheck.checkParameterError(routineName, paramList,   "variables",   functionParamListName,errMsg)  || errorFlag;

@@ -827,6 +827,7 @@ SCC::SymFun symbolicDifferentiate(SCC::SymFun& F,const char* var)
 
     if(initReturn) {std::cout << " Error " << std::endl;}
 
+
     char** dStrings  = new char*[D.evaluationDataSize];
     long*  dPriority = new long[D.evaluationDataSize];
 
@@ -937,12 +938,6 @@ long* evaluationPriority)
     functionIndex = F.executionArray[executionIndex]; executionIndex++;
     argCount      = F.executionArray[executionIndex]; executionIndex++;
     resultIndex   = F.executionArray[executionIndex+(argCount-1)];
-
-    //std::cout << "Fix this problem later ZZZZ " << std::endl;
-    //std::cout << functionIndex << std::endl;
-    //std::cout << argCount      << std::endl;
-    //std::cout << resultIndex   << std::endl;
-    //std::cout << std::endl;
 
     centPriority = L.Priority[functionIndex];
 //

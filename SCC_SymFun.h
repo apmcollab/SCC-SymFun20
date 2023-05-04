@@ -48,6 +48,8 @@
 #ifndef SYMBOLIC_FUNCTION_
 #define SYMBOLIC_FUNCTION_
 
+#define SPACES " \t\r\n"
+
 #include "SCC_OperatorLib.h"
 #include "SCC_RealOperatorLib.h"
 #include "SCC_ExpressionTransform.h"
@@ -1020,15 +1022,59 @@ protected:
         create(V,Vcount,C,Ccount, Cvalues, S);
     }
 
-    long create(const char** V, long Vcount, const char** C,
-    long Ccount, double const* Cvalues, char const* S)
+    std::string cleanUpInput(std::string inputString)
     {
+    //
+    // Clean up input string
+    //
+    // Remove extraneous outer parenthesis
+    //
+    	trim(inputString,SPACES);
+    	size_t sSize = inputString.size();
+
+       long leftCount;
+       long rghtCount;
+       bool removeFlag;
+
+       if((inputString.at(0) == '(')&&(inputString.at(sSize-1)==')'))
+       {
+           removeFlag = true;
+    	   leftCount =  1;
+    	   rghtCount =  0;
+    	   for(size_t k = 1; k < sSize; k++)
+    	   {
+    		   if(inputString.at(k) == '('){leftCount += 1;}
+    		   if(inputString.at(k) == ')'){rghtCount += 1;}
+    		   if(((leftCount - rghtCount) == 0)&(k < sSize-1))
+    	   	   {
+    	   	       removeFlag = false;
+    	   		   break;
+    	   	   }
+    	   }
+    	   if(removeFlag)
+           {
+           inputString = inputString.substr(1,sSize-2);
+           inputString = cleanUpInput(inputString);
+           }
+        }
+
+
+    return inputString;
+    }
+
+
+    long create(const char** V, long Vcount, const char** C,  long Ccount, double const* Cvalues, char const* S)
+    {
+        std::string          Sstring(S);
+    	Sstring = cleanUpInput(Sstring);
+
     //
     //  Allocate Storage and Initalize
     //
+    	size_t Ssize = Sstring.size();
 
-        constructorString = new char[strlen(S) + 1];
-        COPYSTR(constructorString, strlen(S) + 1,S);
+        constructorString = new char[Ssize + 1];
+        COPYSTR(constructorString, Ssize + 1,Sstring.c_str());
 
         variableCount  = Vcount;
         if(Vcount > 0)
@@ -1394,6 +1440,33 @@ protected:
     }
 
 
+  // Usefull string utlities, included as members to remove dependencies.
+
+    inline std::string trim_right (const std::string & s, const std::string & t = SPACES)
+    {
+    std::string d (s);
+    std::string::size_type i (d.find_last_not_of (t));
+    if (i == std::string::npos)
+        return "";
+    else
+     return d.erase (d.find_last_not_of (t) + 1) ;
+    }    // end of trim_right
+
+    inline std::string trim_left (const std::string & s, const std::string & t = SPACES)
+    {
+    std::string d (s);
+    return d.erase (0, s.find_first_not_of (t)) ;
+    }    // end of trim_left
+
+    inline std::string trim (const std::string & s, const std::string & t = SPACES)
+    {
+    std::string d (s);
+    return trim_left (trim_right (d, t), t) ;
+    }  // end of trim
+
+
+
+
     char*       constructorString;
 
     char**      variableNames;
@@ -1421,6 +1494,8 @@ protected:
     RealOperatorLib RealOpLib;
 };
 }
+
+#undef SPACES
 #endif
 
 
